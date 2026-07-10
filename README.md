@@ -1,6 +1,6 @@
 # ws-wedding
 
-Wayne & Sophia 的婚禮網站。
+Wayne & Sophia 婚禮網站
 
 ## 使用方式
 直接用瀏覽器打開 `index.html` 就可以預覽。
