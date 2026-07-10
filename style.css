@@ -273,3 +273,156 @@ body{
   .hero-free .tag-block{bottom:12%;left:8%}
   .hero-free .tagline{font-size:16px}
 }
+
+
+/* Homepage V5 adjustments */
+.hero-free .hero-logo{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0;
+  opacity:.98;
+  filter:none;
+  mix-blend-mode:normal;
+}
+.hero-free .name-snow{
+  display:inline-block;
+  margin:0 .42em;
+  color:#8faabc;
+  font-size:.58em;
+  transform:translateY(-.08em) rotate(8deg);
+}
+.chapter .en,
+.closing .en{
+  display:none;
+}
+.details h3{
+  font-family:"LXGW WenKai TC",cursive;
+  font-size:28px;
+  letter-spacing:.08em;
+}
+.nav-grid span{
+  display:none;
+}
+.closing h2{
+  letter-spacing:.12em;
+}
+
+
+/* Homepage V6 — countdown and appointment guide */
+.countdown{
+  margin-top:8px;
+  text-align:center;
+}
+.countdown>p{
+  margin:0 0 8px;
+  font-family:"LXGW WenKai TC",cursive;
+  font-size:14px;
+  letter-spacing:.14em;
+  color:#7894a8;
+}
+.countdown-numbers{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+}
+.countdown-numbers span{
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+}
+.countdown-numbers strong{
+  font-family:"Cormorant Garamond",serif;
+  font-size:28px;
+  font-weight:400;
+  letter-spacing:.06em;
+  color:#4d6a7f;
+}
+.countdown-numbers small{
+  font-size:12px;
+  color:#8ba4b6;
+}
+
+.guide-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:68px;
+}
+.guide-card{
+  border:1px solid rgba(88,120,145,.22);
+  background:rgba(255,255,255,.78);
+}
+.guide-card summary{
+  list-style:none;
+  min-height:220px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:22px;
+  align-items:end;
+  cursor:pointer;
+}
+.guide-card summary::-webkit-details-marker{display:none}
+.guide-card summary small{
+  align-self:start;
+  font-family:"Cormorant Garamond",serif;
+  color:#93aaba;
+}
+.guide-card h3{
+  margin:0;
+  font-size:32px;
+  font-weight:400;
+  letter-spacing:.08em;
+  color:#3f5a6e;
+}
+.guide-card summary p{
+  margin:8px 0 0;
+  color:#7993a6;
+}
+.guide-card summary>span{
+  font-size:24px;
+  color:#8ba5b7;
+}
+.guide-content{
+  padding:0 30px 32px;
+  border-top:1px solid rgba(88,120,145,.14);
+}
+.timeline div{
+  display:grid;
+  grid-template-columns:78px 1fr;
+  gap:18px;
+  padding:14px 0;
+  border-bottom:1px solid rgba(88,120,145,.12);
+}
+.timeline time{
+  font-family:"Cormorant Garamond",serif;
+  font-size:22px;
+  color:#527086;
+}
+.timeline p{margin:0}
+.guide-note{
+  margin:18px 0 0;
+  font-size:13px;
+  color:#8aa1b2;
+}
+.guide-content strong{
+  font-weight:400;
+  color:#4d687b;
+}
+.map-link{
+  display:inline-block;
+  margin-top:8px;
+  padding-bottom:2px;
+  text-decoration:none;
+  border-bottom:1px solid #8fa8b9;
+}
+.yuki-grid div p:last-child{
+  max-width:520px;
+}
+@media(max-width:780px){
+  .guide-grid{grid-template-columns:1fr}
+  .guide-card summary{min-height:180px}
+  .countdown-numbers{gap:10px}
+  .countdown-numbers strong{font-size:24px}
+}
