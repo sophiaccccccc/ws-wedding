@@ -326,10 +326,91 @@
     .blessing-close.show{opacity:1;transform:none;pointer-events:auto}
     .blessing-close:hover{background:#edf5fa}
 
+
+
+    /* Opening cover */
+    .opening-cover{
+      position:fixed;inset:0;z-index:300;display:grid;place-items:center;
+      min-height:100svh;padding:28px;background:
+      radial-gradient(circle at 50% 35%,rgba(220,236,246,.72),transparent 34%),
+      linear-gradient(180deg,#f8fcfe 0%,#fff 70%,#f6fafc 100%);
+      overflow:hidden;transition:opacity 1s ease,visibility 1s ease
+    }
+    .opening-cover.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+    .opening-inner{position:relative;width:min(520px,100%);text-align:center;padding-top:92px}
+    .opening-snowflake{
+      position:absolute;left:50%;top:-38vh;
+      font-size:44px;line-height:1;color:#6f8fa5;text-shadow:0 0 22px rgba(149,184,207,.42);
+      transform:translateX(-50%) scale(.28) rotate(-24deg);
+      transform-origin:center;
+      animation:openingSnowFall 3.8s cubic-bezier(.18,.66,.22,1) forwards,
+                openingSnowFloat 4.8s ease-in-out 3.85s infinite
+    }
+    @keyframes openingSnowFall{
+      0%{top:-38vh;opacity:0;transform:translateX(-50%) translateX(-34px) scale(.28) rotate(-42deg);filter:blur(1.8px)}
+      12%{opacity:.45}
+      34%{opacity:.78;transform:translateX(-50%) translateX(28px) scale(.48) rotate(8deg);filter:blur(1.1px)}
+      62%{opacity:.95;transform:translateX(-50%) translateX(-16px) scale(.78) rotate(54deg);filter:blur(.45px)}
+      84%{transform:translateX(-50%) translateX(8px) scale(1.02) rotate(82deg);filter:blur(0)}
+      100%{top:18px;opacity:1;transform:translateX(-50%) scale(1.18) rotate(96deg);filter:blur(0)}
+    }
+    @keyframes openingSnowFloat{
+      0%,100%{transform:translateX(-50%) scale(1.18) translateY(0) rotate(96deg)}
+      50%{transform:translateX(-50%) scale(1.18) translateY(4px) rotate(100deg)}
+    }
+    .opening-title,.opening-subtitle,.opening-enter{opacity:0;transform:translateY(10px)}
+    .opening-title{
+      margin:16px 0 0;font-size:clamp(22px,4.2vw,30px);font-weight:400;letter-spacing:.16em;color:var(--deep);
+      animation:openingTextIn 1.15s ease 4.75s forwards
+    }
+    .opening-subtitle{
+      margin:12px 0 0;font-size:clamp(13px,2.6vw,16px);letter-spacing:.14em;color:#7895aa;
+      animation:openingTextIn 1.15s ease 6.35s forwards
+    }
+    @keyframes openingTextIn{to{opacity:1;transform:none}}
+    .opening-enter{
+      margin-top:38px;padding:12px 10px;border:0;border-top:1px solid rgba(73,101,121,.22);border-bottom:1px solid rgba(73,101,121,.22);
+      background:transparent;color:#567287;letter-spacing:.13em;cursor:pointer;
+      animation:openingTextIn 1.05s ease 8.15s forwards;
+      transition:letter-spacing .3s ease,color .3s ease,border-color .3s ease
+    }
+    .opening-enter:hover{letter-spacing:.18em;color:var(--deep);border-color:rgba(73,101,121,.4)}
+    .opening-drift{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .opening-drift span{position:absolute;top:-12%;color:#9bb5c7;opacity:.15;animation:openingDrift linear infinite}
+    @keyframes openingDrift{to{transform:translate3d(var(--x,30px),118vh,0) rotate(180deg)}}
+    body.opening-locked{overflow:hidden}
+
+    /* First-time Yuki moments prelude */
+    .moments-prelude{
+      position:fixed;inset:0;z-index:160;display:none;place-items:center;padding:24px;
+      background:rgba(247,251,253,.96);text-align:center;color:var(--deep)
+    }
+    .moments-prelude.show{display:grid;animation:momentsPreludeIn .35s ease both}
+    .moments-prelude.hide{animation:momentsPreludeOut .3s ease both}
+    .moments-prelude .prelude-paw{display:block;font-size:24px;opacity:.42;margin-bottom:14px}
+    .moments-prelude p{margin:0;font-size:17px;line-height:2;letter-spacing:.08em}
+    @keyframes momentsPreludeIn{from{opacity:0}to{opacity:1}}
+    @keyframes momentsPreludeOut{from{opacity:1}to{opacity:0}}
+
+    @media(max-width:780px){
+      .opening-inner{padding-top:78px}
+      .opening-snowflake{font-size:38px}
+      .opening-enter{margin-top:34px}
+    }
+
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
-<body>
+<body class="opening-locked">
+  <div class="opening-cover" id="openingCover" aria-label="網站開場">
+    <div class="opening-drift" id="openingDrift" aria-hidden="true"></div>
+    <div class="opening-inner">
+      <div class="opening-snowflake" aria-hidden="true">❄</div>
+      <h1 class="opening-title">雪と芽吹く春</h1>
+      <p class="opening-subtitle">雪のある日々を　重ねてゆく</p>
+      <button class="opening-enter" id="openingEnter" type="button">走進我們的春天</button>
+    </div>
+  </div>
   <div class="weather-layer" id="weatherLayer" aria-hidden="true"></div>
 
   <header class="hero" id="top">
@@ -388,7 +469,7 @@
           <button class="yuki-moments-card" id="openYukiMoments" type="button">
             <span class="yuki-moments-paw" aria-hidden="true">🐾</span>
             <span class="yuki-moments-title">Yuki 的重點小時刻</span>
-            <span class="yuki-moments-sub">陪伴我們的每一天　都成為家的模樣</span>
+            <span class="yuki-moments-sub">從相遇的那一天起<br>每一步都是家的方向</span>
             <span class="yuki-moments-link">翻開她的小小足跡　→</span>
           </button>
         </div>
@@ -457,6 +538,13 @@
 
 
 
+  <div class="moments-prelude" id="momentsPrelude" aria-hidden="true">
+    <div>
+      <span class="prelude-paw" aria-hidden="true">🐾</span>
+      <p>Yuki 正在帶你<br>回到那些珍貴的小時光……</p>
+    </div>
+  </div>
+
   <div class="moments-modal" id="yukiMomentsModal" aria-hidden="true">
     <div class="moments-page" role="dialog" aria-modal="true" aria-labelledby="momentsTitle">
       <div class="moments-top">
@@ -464,8 +552,8 @@
       </div>
       <header class="moments-header">
         <span class="paw" aria-hidden="true">🐾</span>
-        <h2 id="momentsTitle">Yuki 的重點小時刻</h2>
-        <p>一起走過的日子　慢慢成為家的模樣</p>
+        <h2 id="momentsTitle">她的小小足跡</h2>
+        <p>收藏著我們的每一天</p>
       </header>
       <div class="moments-list" id="yukiMomentsList"></div>
     </div>
@@ -482,6 +570,29 @@
       <button class="blessing-close" id="blessingClose" type="button">知道了</button>
     </div>
   </div>
+
+  <script>
+    (()=>{
+      const cover=document.getElementById("openingCover");
+      const enter=document.getElementById("openingEnter");
+      const drift=document.getElementById("openingDrift");
+      for(let i=0;i<16;i++){
+        const flake=document.createElement("span");
+        flake.textContent=Math.random()>.35?"❄":"✦";
+        flake.style.left=Math.random()*100+"%";
+        flake.style.fontSize=(6+Math.random()*8)+"px";
+        flake.style.animationDuration=(12+Math.random()*12)+"s";
+        flake.style.animationDelay=(-Math.random()*15)+"s";
+        flake.style.setProperty("--x",(-35+Math.random()*70)+"px");
+        drift.appendChild(flake);
+      }
+      enter?.addEventListener("click",()=>{
+        cover.classList.add("is-leaving");
+        document.body.classList.remove("opening-locked");
+        window.setTimeout(()=>cover.remove(),850);
+      });
+    })();
+  </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
@@ -510,7 +621,7 @@
 
     const galleries = {
       wedding: ["wedding01.jpg","wedding02.jpg","wedding03.jpg","wedding04.jpg","wedding05.jpg"],
-      yuki: ["yuki/yuki01.jpg","yuki/yuki02.JPG","yuki/yuki03.jpg","yuki/yuki04.JPG","yuki/yuki05.JPG"]
+      yuki: ["yuki/yuki01.jpg","yuki/yuki02.jpg","yuki/yuki03.jpg","yuki/yuki04.jpg","yuki/yuki05.jpg"]
     };
 
     // Yuki 重點小時刻：替換下方照片檔名、日期與文字即可。
@@ -586,7 +697,9 @@
     const yukiMomentsList = document.getElementById("yukiMomentsList");
     const openYukiMoments = document.getElementById("openYukiMoments");
     const closeYukiMoments = document.getElementById("closeYukiMoments");
+    const momentsPrelude = document.getElementById("momentsPrelude");
     let pageScrollBeforeMoments = 0;
+    let hasShownMomentsPrelude = false;
 
     function renderYukiMoments(){
       yukiMomentsList.replaceChildren();
@@ -610,13 +723,32 @@
       });
     }
 
-    function showYukiMoments(){
-      pageScrollBeforeMoments=window.scrollY;
+    function openMomentsPage(){
       yukiMomentsModal.classList.add("open");
       yukiMomentsModal.setAttribute("aria-hidden","false");
-      document.body.style.overflow="hidden";
       yukiMomentsModal.scrollTop=0;
       closeYukiMoments.focus({preventScroll:true});
+    }
+
+    function showYukiMoments(){
+      pageScrollBeforeMoments=window.scrollY;
+      document.body.style.overflow="hidden";
+      if(hasShownMomentsPrelude){
+        openMomentsPage();
+        return;
+      }
+      hasShownMomentsPrelude=true;
+      momentsPrelude.classList.remove("hide");
+      momentsPrelude.classList.add("show");
+      momentsPrelude.setAttribute("aria-hidden","false");
+      window.setTimeout(()=>{
+        momentsPrelude.classList.add("hide");
+        window.setTimeout(()=>{
+          momentsPrelude.classList.remove("show","hide");
+          momentsPrelude.setAttribute("aria-hidden","true");
+          openMomentsPage();
+        },300);
+      },800);
     }
     function hideYukiMoments(){
       yukiMomentsModal.classList.remove("open");
@@ -677,7 +809,7 @@
       blessingButtonTimer = setTimeout(()=>{
         blessingClose.classList.add("show");
         blessingClose.focus({preventScroll:true});
-      },2000);
+      },1500);
     }
 
     function closeBlessingModal(){
