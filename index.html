@@ -67,9 +67,9 @@
     .gallery-shell{position:relative}
     .gallery{position:relative;overflow:hidden;border-radius:180px 180px 12px 12px;background:linear-gradient(135deg,#edf6fb,#d7e8f2);box-shadow:0 24px 70px rgba(78,108,129,.10)}
     .gallery.story-gallery{aspect-ratio:16/10}
-    .gallery.yuki-gallery{aspect-ratio:4/5;border-radius:180px 180px 14px 14px}
+    .gallery.yuki-gallery{aspect-ratio:2/3;max-width:470px;margin-inline:auto;border-radius:180px 180px 14px 14px}
     .slides{height:100%;display:flex;transition:transform .65s cubic-bezier(.22,.61,.36,1);touch-action:pan-y}
-    .slide{position:relative;min-width:100%;height:100%;display:grid;place-items:center;overflow:hidden;cursor:zoom-in}
+    .slide{position:relative;min-width:100%;height:100%;display:grid;place-items:center;overflow:hidden;cursor:grab}
     .slide img{width:100%;height:100%;display:block;object-fit:cover}
     .yuki-gallery .slide{
       cursor:grab;
@@ -81,7 +81,7 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      object-position:center 38%;
+      object-position:center center;
       transform:none;
       background:transparent;
       pointer-events:none;
@@ -127,14 +127,6 @@
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
     .reveal.show{opacity:1;transform:none}
 
-    .lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(18,28,35,.92);padding:28px}
-    .lightbox.open{display:flex}
-    .lightbox img{max-width:min(1100px,88vw);max-height:84vh;object-fit:contain;box-shadow:0 30px 90px rgba(0,0,0,.36)}
-    .lightbox-close,.lightbox-nav{position:absolute;border:0;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;backdrop-filter:blur(8px)}
-    .lightbox-close{right:22px;top:20px;width:44px;height:44px;border-radius:50%;font-size:25px}
-    .lightbox-nav{top:50%;transform:translateY(-50%);width:50px;height:64px;font-size:34px}
-    .lightbox-nav.prev{left:18px}.lightbox-nav.next{right:18px}
-    .lightbox-count{position:absolute;bottom:18px;color:rgba(255,255,255,.78);font-family:"Cormorant Garamond",serif;letter-spacing:.14em}
 
     @media(max-width:780px){
       .hero{padding:42px 18px 30px}
@@ -153,17 +145,41 @@
       .gallery::after,.gallery.yuki-gallery::after{inset:16px;border-radius:94px 94px 6px 6px}
       .gallery-control{width:38px;height:38px;font-size:20px}
       .gallery-control.prev{left:10px}.gallery-control.next{right:10px}
-      .yuki-gallery .slide img{width:100%;height:100%;object-fit:cover;object-position:center 38%;transform:none}
+      .yuki-gallery .slide img{width:100%;height:100%;object-fit:cover;object-position:center center;transform:none}
       .yuki-copy h3{font-size:31px;letter-spacing:.09em}
       .yuki-copy .body-copy{font-size:16px}
       .countdown{padding:74px 18px 84px}
       .countdown-days{font-size:96px}
       .closing{min-height:60vh;padding:88px 12px}
       .closing h2{font-size:clamp(21px,6vw,30px);letter-spacing:.05em}
-      .lightbox{padding:12px}
-      .lightbox img{max-width:94vw;max-height:78vh}
-      .lightbox-nav{width:42px;height:56px}.lightbox-nav.prev{left:4px}.lightbox-nav.next{right:4px}
+      .guestbook-section{width:min(100% - 32px,680px);padding:88px 0}
+      .guestbook-card{padding:30px 22px;border-radius:24px}
+      .guestbook-row{grid-template-columns:1fr}
     }
+
+    .guestbook-section{width:min(920px,calc(100% - 40px));margin:auto;padding:118px 0}
+    .guestbook-card{padding:52px;border:1px solid var(--line);border-radius:34px;background:
+      radial-gradient(circle at 14% 5%,rgba(220,236,246,.58),transparent 34%),#fff;
+      box-shadow:0 24px 70px rgba(78,108,129,.08)}
+    .guestbook-intro{margin:0 0 34px;font-size:17px;letter-spacing:.035em}
+    .guestbook-form{display:grid;gap:20px}
+    .guestbook-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .guestbook-field{display:grid;gap:8px}
+    .guestbook-field label{font-size:13px;letter-spacing:.12em;color:#7894a6}
+    .guestbook-field input,.guestbook-field textarea{
+      width:100%;border:0;border-bottom:1px solid var(--line);border-radius:0;
+      padding:12px 2px;background:transparent;color:var(--deep);
+      font:inherit;outline:none
+    }
+    .guestbook-field textarea{min-height:130px;resize:vertical}
+    .guestbook-field input:focus,.guestbook-field textarea:focus{border-color:#86a9c0}
+    .guestbook-submit{
+      justify-self:start;margin-top:8px;padding:12px 28px;border:1px solid rgba(73,101,121,.22);
+      border-radius:999px;background:#f6fafc;color:#567287;cursor:pointer
+    }
+    .guestbook-submit:hover{background:#edf5fa}
+    .guestbook-note{margin:14px 0 0;font-size:12px;letter-spacing:.04em;color:#8ca2b1}
+
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
@@ -187,7 +203,7 @@
     <section class="section reveal" id="journey">
       <div class="story-intro">
         <div class="chapter">
-          <span class="chapter-no">第一章</span>
+          <span class="chapter-no">01</span>
           <h2>我們</h2>
         </div>
         <p class="story-copy">從相知　相伴　到與 Yuki 共度朝夕<br>那些平凡的日常　悄悄累積成最珍貴的風景</p>
@@ -199,7 +215,7 @@
           <button class="gallery-control prev" type="button" aria-label="上一張">‹</button>
           <button class="gallery-control next" type="button" aria-label="下一張">›</button>
         </div>
-        <div class="gallery-meta"><div class="dots"></div><span class="counter">1 / 5</span></div>
+        <div class="gallery-meta"><div class="dots"></div><span class="counter">1 / 6</span></div>
       </div>
     </section>
 
@@ -216,7 +232,7 @@
             <button class="gallery-control prev" type="button" aria-label="上一張">‹</button>
             <button class="gallery-control next" type="button" aria-label="下一張">›</button>
           </div>
-          <div class="gallery-meta"><div class="dots"></div><span class="counter">1 / 5</span></div>
+          <div class="gallery-meta"><div class="dots"></div><span class="counter">1 / 6</span></div>
         </div>
 
         <div class="yuki-copy">
@@ -224,6 +240,39 @@
           <p class="jp-sub">雪のある日々を　重ねてゆく</p>
           <p class="body-copy">Yuki 是我們生活裡最柔軟的陪伴<br>也是這場婚禮不可缺席的小小家人<br>從散步　旅行　到每一個平凡日常<br>她陪著我們慢慢把生活變成家的模樣</p>
         </div>
+      </div>
+    </section>
+
+
+    <section class="guestbook-section reveal" id="guestbook">
+      <div class="chapter">
+        <span class="chapter-no">03</span>
+        <h2>留言板</h2>
+      </div>
+
+      <div class="guestbook-card">
+        <p class="guestbook-intro">留下想對我們說的話<br>讓這一天多一份屬於你的溫柔記憶</p>
+
+        <form class="guestbook-form" id="guestbookForm">
+          <div class="guestbook-row">
+            <div class="guestbook-field">
+              <label for="guestName">你的名字</label>
+              <input id="guestName" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="guestbook-field">
+              <label for="guestRelation">與我們的關係</label>
+              <input id="guestRelation" name="relation" type="text" placeholder="家人　朋友　同事">
+            </div>
+          </div>
+
+          <div class="guestbook-field">
+            <label for="guestMessage">想說的話</label>
+            <textarea id="guestMessage" name="message" required></textarea>
+          </div>
+
+          <button class="guestbook-submit" type="submit">送出留言</button>
+          <p class="guestbook-note">留言表單尚未連接雲端收件服務，加入 Google 表單連結後即可正式收件。</p>
+        </form>
       </div>
     </section>
 
@@ -244,26 +293,14 @@
 
   <footer>© 2027 Wayne Sophia Yuki</footer>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="照片放大檢視">
-    <button class="lightbox-close" type="button" aria-label="關閉">×</button>
-    <button class="lightbox-nav prev" type="button" aria-label="上一張">‹</button>
-    <img id="lightboxImage" alt="放大照片">
-    <button class="lightbox-nav next" type="button" aria-label="下一張">›</button>
-    <div class="lightbox-count" id="lightboxCount"></div>
-  </div>
 
   <script>
     const galleries = {
       wedding: ["wedding01.jpg","wedding02.jpg","wedding03.jpg","wedding04.jpg","wedding05.jpg"],
-      yuki: ["yuki/yuki01.jpg","yuki/yuki02.jpg","yuki/yuki03.jpg","yuki/yuki04.jpg","yuki/yuki05.jpg","yuki/yuki06.jpg"]
+      yuki: ["yuki/yuki01.jpg","yuki/yuki02.JPG","yuki/yuki03.jpg","yuki/yuki04.JPG","yuki/yuki05.JPG","yuki/yuki06.JPG"]
     };
 
     const galleryStates = {};
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightboxImage");
-    const lightboxCount = document.getElementById("lightboxCount");
-    let lightboxGallery = "";
-    let lightboxIndex = 0;
 
     function buildGallery(shell){
       const name = shell.dataset.gallery;
@@ -280,7 +317,6 @@
         const img = slide.querySelector("img");
         img.addEventListener("load",()=>slide.classList.add("loaded"));
         img.addEventListener("error",()=>img.style.display="none");
-        if(name !== "yuki") slide.addEventListener("click",()=>openLightbox(name,i));
         slides.appendChild(slide);
 
         const dot = document.createElement("button");
@@ -321,30 +357,13 @@
       galleryStates[name].timer=setInterval(()=>goTo(name,galleryStates[name].index+1),5000);
     }
 
-    function openLightbox(name,index){
-      lightboxGallery=name;lightboxIndex=index;
-      updateLightbox();lightbox.classList.add("open");document.body.style.overflow="hidden";
-    }
-    function updateLightbox(){
-      lightboxImage.src=galleries[lightboxGallery][lightboxIndex];
-      lightboxCount.textContent=`${lightboxIndex+1} / ${galleries[lightboxGallery].length}`;
-    }
-    function moveLightbox(step){
-      const count=galleries[lightboxGallery].length;
-      lightboxIndex=(lightboxIndex+step+count)%count;updateLightbox();
-    }
-    function closeLightbox(){lightbox.classList.remove("open");document.body.style.overflow=""}
     document.querySelectorAll("[data-gallery]").forEach(buildGallery);
-    lightbox.querySelector(".close")?.addEventListener("click",closeLightbox);
-    lightbox.querySelector(".lightbox-close").addEventListener("click",closeLightbox);
-    lightbox.querySelector(".prev").addEventListener("click",()=>moveLightbox(-1));
-    lightbox.querySelector(".next").addEventListener("click",()=>moveLightbox(1));
-    lightbox.addEventListener("click",e=>{if(e.target===lightbox)closeLightbox()});
-    document.addEventListener("keydown",e=>{
-      if(!lightbox.classList.contains("open"))return;
-      if(e.key==="Escape")closeLightbox();
-      if(e.key==="ArrowLeft")moveLightbox(-1);
-      if(e.key==="ArrowRight")moveLightbox(1);
+
+
+    const guestbookForm=document.getElementById("guestbookForm");
+    guestbookForm?.addEventListener("submit",event=>{
+      event.preventDefault();
+      alert("留言板版面已完成。請提供 Google 表單連結後，我會幫你接上正式收件功能。");
     });
 
     function updateCountdown(){
