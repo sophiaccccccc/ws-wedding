@@ -110,14 +110,16 @@
     .yuki-copy .body-copy{margin:34px 0 0;padding-top:28px;border-top:1px solid var(--line);font-size:18px;letter-spacing:.03em}
 
     .countdown{padding:92px 22px 102px;text-align:center;background:
-      radial-gradient(circle at 50% 15%,rgba(211,230,242,.62),transparent 46%),#f8fbfd}
+      radial-gradient(circle at 50% 22%,rgba(211,230,242,.48),transparent 48%),
+      linear-gradient(180deg,rgba(248,251,253,0) 0%,rgba(248,251,253,.88) 20%,rgba(248,251,253,.88) 80%,rgba(248,251,253,0) 100%)}
     .countdown-label{margin:0;font-family:"Cormorant Garamond",serif;font-size:17px;letter-spacing:.24em;text-transform:uppercase;color:#7690a2}
     .countdown-days{margin:12px 0 0;font-family:"Cormorant Garamond",serif;font-size:clamp(82px,14vw,158px);font-weight:400;line-height:.95;color:#49677d;letter-spacing:.01em}
     .countdown-unit{margin:10px 0 0;font-family:"Cormorant Garamond",serif;font-size:23px;letter-spacing:.18em;color:#7894a8}
     .countdown-date{margin:22px 0 0;font-size:14px;letter-spacing:.2em;color:#8ca3b3}
 
     .closing{min-height:68vh;display:grid;place-items:center;text-align:center;padding:100px 18px;background:
-      radial-gradient(circle at 50% 18%,rgba(209,228,240,.64),transparent 40%),#fff;position:relative;overflow:hidden}
+      radial-gradient(circle at 50% 24%,rgba(209,228,240,.46),transparent 46%),
+      linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(250,252,253,.92) 24%,rgba(255,255,255,.96) 76%,#fff 100%);position:relative;overflow:hidden}
     .closing::before,.closing::after{content:"";position:absolute;width:240px;height:240px;border:1px solid rgba(151,177,170,.13);border-radius:50%;filter:blur(.2px)}
     .closing::before{left:-120px;bottom:30px}.closing::after{right:-130px;top:70px}
     .closing h2{margin:0;font-size:clamp(28px,4vw,48px);font-weight:400;letter-spacing:.12em;color:var(--deep);white-space:nowrap}
@@ -679,7 +681,8 @@
         renderVisibleMessages();
         document.querySelector(".guestbook-summary")?.scrollIntoView({behavior:"smooth",block:"start"});
       }else{
-        visibleMessageCount = Math.min(visibleMessageCount + 3, allMessages.length);
+        const increment = window.matchMedia("(max-width: 780px)").matches ? 3 : 4;
+        visibleMessageCount = Math.min(visibleMessageCount + increment, allMessages.length);
         renderVisibleMessages();
       }
     });
