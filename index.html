@@ -155,6 +155,8 @@
       .guestbook-section{width:min(100% - 32px,680px);padding:88px 0}
       .guestbook-card{padding:30px 22px;border-radius:24px}
       .guestbook-row{grid-template-columns:1fr}
+      .message-list{grid-template-columns:1fr}
+      .message-more{width:100%;justify-content:center}
     }
 
     .guestbook-section{width:min(920px,calc(100% - 40px));margin:auto;padding:118px 0}
@@ -179,6 +181,88 @@
     }
     .guestbook-submit:hover{background:#edf5fa}
     .guestbook-note{margin:14px 0 0;font-size:12px;letter-spacing:.04em;color:#8ca2b1}
+
+
+    .guestbook-status{min-height:1.5em;margin:14px 0 0;font-size:13px;letter-spacing:.04em;color:#7894a6}
+    .guestbook-status.error{color:#a66f6f}
+    .guestbook-summary{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:42px 0 18px;padding-top:28px;border-top:1px solid var(--line)}
+    .guestbook-summary h3{margin:0;font-size:20px;font-weight:400;letter-spacing:.1em;color:var(--deep)}
+    .guestbook-count{font-family:"Cormorant Garamond",serif;font-size:15px;letter-spacing:.12em;color:#7894a6}
+    .message-list{display:grid;gap:16px}
+    .message-card{position:relative;padding:38px 24px 22px;border:1px solid var(--line);border-radius:22px;background:rgba(247,251,253,.76);overflow:hidden}
+    .message-card-icon{position:absolute;left:20px;top:12px;font-size:18px;line-height:1;opacity:.16;filter:grayscale(.28);pointer-events:none;user-select:none}
+    .message-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:9px}
+    .message-name{font-size:16px;letter-spacing:.08em;color:var(--deep)}
+    .message-time{font-family:"Cormorant Garamond",serif;font-size:13px;letter-spacing:.08em;color:#91a9ba;white-space:nowrap}
+    .message-relation{margin-left:8px;font-size:12px;color:#91a9ba}
+    .message-text{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.9;color:var(--ink)}
+    .message-empty{padding:28px;text-align:center;border:1px dashed var(--line);border-radius:20px;color:#8ca2b1}
+    .message-more-wrap{display:flex;justify-content:center;margin-top:24px}
+    .message-more{display:none;align-items:center;gap:9px;padding:11px 24px;border:1px solid rgba(73,101,121,.18);border-radius:999px;background:rgba(247,251,253,.9);color:#637f93;cursor:pointer;letter-spacing:.08em}
+    .message-more.show{display:inline-flex}
+    .message-more:hover{background:#edf5fa}
+    .message-more-arrow{font-family:"Cormorant Garamond",serif;font-size:18px;line-height:1;transition:transform .25s ease}
+    .message-more.is-collapse .message-more-arrow{transform:rotate(180deg)}
+
+
+    .message-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      align-items:start;
+    }
+    .message-card{
+      break-inside:avoid;
+      animation:messageFade .7s ease both;
+    }
+    @keyframes messageFade{
+      from{opacity:0;transform:translateY(14px)}
+      to{opacity:1;transform:none}
+    }
+    .blessing-modal{
+      position:fixed;inset:0;z-index:140;display:none;place-items:center;
+      padding:22px;background:rgba(32,47,58,.32);backdrop-filter:blur(7px)
+    }
+    .blessing-modal.open{display:grid}
+    .blessing-dialog{
+      position:relative;overflow:hidden;width:min(440px,92vw);padding:42px 34px 32px;text-align:center;
+      border:1px solid rgba(255,255,255,.72);border-radius:30px;
+      background:rgba(255,255,255,.95);
+      box-shadow:0 28px 90px rgba(55,78,95,.22);
+      animation:blessingIn .55s cubic-bezier(.2,.8,.2,1) both
+    }
+    @keyframes blessingIn{
+      from{opacity:0;transform:translateY(18px) scale(.96)}
+      to{opacity:1;transform:none}
+    }
+    .blessing-icon{
+      display:block;margin-bottom:15px;font-size:25px;
+      animation:blessingSpark 1.5s ease-in-out infinite
+    }
+    @keyframes blessingSpark{50%{transform:translateY(-3px) rotate(4deg)}}
+    .blessing-dialog h3{
+      margin:0;font-size:24px;font-weight:400;letter-spacing:.1em;color:var(--deep)
+    }
+    .blessing-dialog p{
+      margin:20px 0 0;font-size:16px;line-height:2;color:var(--ink)
+    }
+    .paw-trail{position:absolute;left:18px;right:18px;bottom:16px;height:38px;display:none;pointer-events:none}
+    .paw-trail.play{display:block}
+    .paw-print{position:absolute;left:-34px;bottom:0;font-size:18px;opacity:0;filter:grayscale(1);color:#8ea8ba;animation:pawRun 1.7s ease-out forwards}
+    .paw-print:nth-child(2){animation-delay:.22s;bottom:10px;transform:rotate(14deg)}
+    .paw-print:nth-child(3){animation-delay:.44s;bottom:1px;transform:rotate(-10deg)}
+    .paw-print:nth-child(4){animation-delay:.66s;bottom:11px;transform:rotate(12deg)}
+    @keyframes pawRun{
+      0%{left:-34px;opacity:0}
+      15%{opacity:.17}
+      70%{opacity:.13}
+      100%{left:calc(100% + 8px);opacity:0}
+    }
+    .blessing-close{
+      margin-top:26px;padding:10px 28px;border:1px solid rgba(73,101,121,.22);
+      border-radius:999px;background:#f6fafc;color:#567287;cursor:pointer
+    }
+    .blessing-close:hover{background:#edf5fa}
 
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
@@ -247,32 +331,41 @@
     <section class="guestbook-section reveal" id="guestbook">
       <div class="chapter">
         <span class="chapter-no">03</span>
-        <h2>留言板</h2>
+        <h2>春日寄語</h2>
       </div>
 
       <div class="guestbook-card">
-        <p class="guestbook-intro">留下想對我們說的話<br>讓這一天多一份屬於你的溫柔記憶</p>
+        <p class="guestbook-intro">願每一句話<br>都成為我們珍藏的回憶</p>
 
         <form class="guestbook-form" id="guestbookForm">
-          <div class="guestbook-row">
-            <div class="guestbook-field">
-              <label for="guestName">你的名字</label>
-              <input id="guestName" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="guestbook-field">
-              <label for="guestRelation">與我們的關係</label>
-              <input id="guestRelation" name="relation" type="text" placeholder="家人　朋友　同事">
-            </div>
+          <div class="guestbook-field">
+            <label for="guestName">你的名字（可匿名）</label>
+            <input id="guestName" name="name" type="text" autocomplete="name" maxlength="30" placeholder="不填寫將顯示為匿名">
           </div>
 
           <div class="guestbook-field">
             <label for="guestMessage">想說的話</label>
-            <textarea id="guestMessage" name="message" required></textarea>
+            <textarea id="guestMessage" name="message" maxlength="300" required></textarea>
           </div>
 
-          <button class="guestbook-submit" type="submit">送出留言</button>
-          <p class="guestbook-note">留言表單尚未連接雲端收件服務，加入 Google 表單連結後即可正式收件。</p>
+          <button class="guestbook-submit" id="guestbookSubmit" type="submit">留下祝福</button>
+          <p class="guestbook-note">名字最多 30 字，留言最多 300 字</p>
+          <p class="guestbook-status" id="guestbookStatus" role="status" aria-live="polite"></p>
         </form>
+
+        <div class="guestbook-summary">
+          <h3>大家的寄語</h3>
+          <span class="guestbook-count" id="guestbookCount">載入中</span>
+        </div>
+        <div class="message-list" id="messageList">
+          <div class="message-empty">正在載入寄語</div>
+        </div>
+        <div class="message-more-wrap">
+          <button class="message-more" id="messageMore" type="button" aria-expanded="false">
+            <span id="messageMoreText">閱讀更多寄語</span>
+            <span class="message-more-arrow" aria-hidden="true">↓</span>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -294,7 +387,44 @@
   <footer>© 2027 Wayne Sophia Yuki</footer>
 
 
-  <script>
+
+  <div class="blessing-modal" id="blessingModal" aria-hidden="true">
+    <div class="blessing-dialog" role="dialog" aria-modal="true" aria-labelledby="blessingTitle">
+      <span class="blessing-icon" id="blessingIcon">❄️</span>
+      <h3 id="blessingTitle">謝謝你的祝福</h3>
+      <p id="blessingMessage">你的寄語<br>已經飄進春天裡</p>
+      <div class="paw-trail" id="pawTrail" aria-hidden="true">
+        <span class="paw-print">🐾</span><span class="paw-print">🐾</span><span class="paw-print">🐾</span><span class="paw-print">🐾</span>
+      </div>
+      <button class="blessing-close" id="blessingClose" type="button">知道了</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      serverTimestamp,
+      query,
+      orderBy,
+      limit,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAuUa07mam9pqzPHXmkFAtE9Rk9MEwO_iQ",
+      authDomain: "ws-wedding-6b08c.firebaseapp.com",
+      projectId: "ws-wedding-6b08c",
+      storageBucket: "ws-wedding-6b08c.firebasestorage.app",
+      messagingSenderId: "1096534187835",
+      appId: "1:1096534187835:web:6ac7d69895515e9f4b611e"
+    };
+
+    const firebaseApp = initializeApp(firebaseConfig);
+    const db = getFirestore(firebaseApp);
+
     const galleries = {
       wedding: ["wedding01.jpg","wedding02.jpg","wedding03.jpg","wedding04.jpg","wedding05.jpg"],
       yuki: ["yuki/yuki01.jpg","yuki/yuki02.JPG","yuki/yuki03.jpg","yuki/yuki04.JPG","yuki/yuki05.JPG","yuki/yuki06.JPG"]
@@ -360,10 +490,214 @@
     document.querySelectorAll("[data-gallery]").forEach(buildGallery);
 
 
-    const guestbookForm=document.getElementById("guestbookForm");
-    guestbookForm?.addEventListener("submit",event=>{
+    const guestbookForm = document.getElementById("guestbookForm");
+    const guestbookSubmit = document.getElementById("guestbookSubmit");
+    const guestbookStatus = document.getElementById("guestbookStatus");
+    const messageList = document.getElementById("messageList");
+    const guestbookCount = document.getElementById("guestbookCount");
+    const messageMore = document.getElementById("messageMore");
+    const messageMoreText = document.getElementById("messageMoreText");
+    const blessingModal = document.getElementById("blessingModal");
+    const blessingClose = document.getElementById("blessingClose");
+    const blessingIcon = document.getElementById("blessingIcon");
+    const blessingMessage = document.getElementById("blessingMessage");
+    const pawTrail = document.getElementById("pawTrail");
+
+    const CARD_ICONS = ["❄️","🌿","💍","🐶"];
+    const BLESSING_RESPONSES = [
+      {icon:"❄️", lines:["你的寄語","已經飄進春天裡"]},
+      {icon:"🌿", lines:["我們會帶著這份祝福","迎接每一個春天"]},
+      {icon:"💍", lines:["你的心意","已經悄悄收藏"]},
+      {icon:"🐶", lines:["願今天的美好","也陪伴著你"]},
+      {icon:"💍", lines:["你的寄語","成為今天最美好的風景"]},
+      {icon:"🐶", lines:["Yuki 搖著尾巴","收下你的祝福 🐾"], yuki:true}
+    ];
+
+    let allMessages = [];
+    let visibleMessageCount = 3;
+
+    function openBlessingModal(){
+      const response = BLESSING_RESPONSES[Math.floor(Math.random()*BLESSING_RESPONSES.length)];
+      blessingIcon.textContent = response.icon;
+      blessingMessage.innerHTML = response.lines.map(escapeHtml).join("<br>");
+      pawTrail.classList.remove("play");
+      blessingModal.classList.add("open");
+      blessingModal.setAttribute("aria-hidden","false");
+      if(response.yuki){
+        void pawTrail.offsetWidth;
+        pawTrail.classList.add("play");
+      }
+      blessingClose.focus();
+    }
+
+    function closeBlessingModal(){
+      blessingModal.classList.remove("open");
+      blessingModal.setAttribute("aria-hidden","true");
+      pawTrail.classList.remove("play");
+    }
+
+    function escapeHtml(value){
+      const span = document.createElement("span");
+      span.textContent = String(value);
+      return span.innerHTML;
+    }
+
+    blessingClose?.addEventListener("click", closeBlessingModal);
+    blessingModal?.addEventListener("click", event=>{
+      if(event.target === blessingModal) closeBlessingModal();
+    });
+
+    const messagesRef = collection(db, "messages");
+
+    function setGuestbookStatus(message, isError=false){
+      guestbookStatus.textContent = message;
+      guestbookStatus.classList.toggle("error", isError);
+    }
+
+    function formatMessageTime(timestamp){
+      if(!timestamp?.toDate) return "剛剛";
+      return new Intl.DateTimeFormat("zh-TW", {
+        year:"numeric", month:"2-digit", day:"2-digit",
+        hour:"2-digit", minute:"2-digit", hour12:false
+      }).format(timestamp.toDate());
+    }
+
+    function iconForMessage(id){
+      let hash = 0;
+      for(const char of String(id)) hash = ((hash << 5) - hash + char.charCodeAt(0)) | 0;
+      return CARD_ICONS[Math.abs(hash) % CARD_ICONS.length];
+    }
+
+    function updateMessageMore(){
+      const total = allMessages.length;
+      if(total <= 3){
+        messageMore.classList.remove("show","is-collapse");
+        messageMore.setAttribute("aria-expanded","false");
+        return;
+      }
+
+      messageMore.classList.add("show");
+      const allVisible = visibleMessageCount >= total;
+      messageMore.classList.toggle("is-collapse", allVisible);
+      messageMore.setAttribute("aria-expanded", String(allVisible));
+      messageMoreText.textContent = allVisible
+        ? "收起寄語"
+        : `閱讀更多寄語　還有 ${total-visibleMessageCount} 則`;
+    }
+
+    function renderVisibleMessages(){
+      messageList.replaceChildren();
+
+      if(!allMessages.length){
+        const empty = document.createElement("div");
+        empty.className = "message-empty";
+        empty.textContent = "還沒有寄語，成為第一個留下祝福的人吧";
+        messageList.appendChild(empty);
+        updateMessageMore();
+        return;
+      }
+
+      allMessages.slice(0, visibleMessageCount).forEach(item=>{
+        const data = item.data;
+        const card = document.createElement("article");
+        card.className = "message-card";
+
+        const icon = document.createElement("span");
+        icon.className = "message-card-icon";
+        icon.textContent = iconForMessage(item.id);
+        icon.setAttribute("aria-hidden","true");
+
+        const head = document.createElement("div");
+        head.className = "message-head";
+
+        const nameWrap = document.createElement("div");
+        const name = document.createElement("span");
+        name.className = "message-name";
+        name.textContent = data.name || "匿名";
+        nameWrap.appendChild(name);
+
+        const time = document.createElement("time");
+        time.className = "message-time";
+        time.textContent = formatMessageTime(data.createdAt);
+
+        const text = document.createElement("p");
+        text.className = "message-text";
+        text.textContent = data.message || "";
+
+        head.append(nameWrap, time);
+        card.append(icon, head, text);
+        messageList.appendChild(card);
+      });
+
+      updateMessageMore();
+    }
+
+    function renderMessages(snapshot){
+      guestbookCount.textContent = `共 ${snapshot.size} 則寄語`;
+      allMessages = snapshot.docs.map(docSnapshot=>({
+        id: docSnapshot.id,
+        data: docSnapshot.data()
+      }));
+      visibleMessageCount = Math.min(Math.max(visibleMessageCount,3), Math.max(allMessages.length,3));
+      renderVisibleMessages();
+    }
+
+    messageMore?.addEventListener("click",()=>{
+      if(visibleMessageCount >= allMessages.length){
+        visibleMessageCount = 3;
+        renderVisibleMessages();
+        document.querySelector(".guestbook-summary")?.scrollIntoView({behavior:"smooth",block:"start"});
+      }else{
+        visibleMessageCount = Math.min(visibleMessageCount + 3, allMessages.length);
+        renderVisibleMessages();
+      }
+    });
+
+    const messagesQuery = query(messagesRef, orderBy("createdAt", "desc"), limit(50));
+    onSnapshot(messagesQuery, renderMessages, error=>{
+      console.error(error);
+      guestbookCount.textContent = "無法載入";
+      messageList.innerHTML = '<div class="message-empty">目前無法載入寄語，請稍後再試</div>';
+      setGuestbookStatus("無法連接寄語區，請確認 Firestore 規則已發布", true);
+    });
+
+    guestbookForm?.addEventListener("submit", async event=>{
       event.preventDefault();
-      alert("留言板版面已完成。請提供 Google 表單連結後，我會幫你接上正式收件功能。");
+
+      const formData = new FormData(guestbookForm);
+      const name = String(formData.get("name") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+
+      if(!message){
+        setGuestbookStatus("請填寫想對我們說的話", true);
+        return;
+      }
+
+      if(name.length > 30 || message.length > 300){
+        setGuestbookStatus("輸入內容超過字數限制", true);
+        return;
+      }
+
+      guestbookSubmit.disabled = true;
+      guestbookSubmit.textContent = "送出中";
+      setGuestbookStatus("");
+
+      try{
+        await addDoc(messagesRef, {
+          name: name || "匿名",
+          message,
+          createdAt: serverTimestamp()
+        });
+        guestbookForm.reset();
+        setGuestbookStatus("");
+        openBlessingModal();
+      }catch(error){
+        console.error(error);
+        setGuestbookStatus("送出失敗，請確認 Firestore 規則已發布", true);
+      }finally{
+        guestbookSubmit.disabled = false;
+        guestbookSubmit.textContent = "留下祝福";
+      }
     });
 
     function updateCountdown(){
