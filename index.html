@@ -4,8 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
-  <meta name="description" content="Wayne Sophia Yuki 婚禮網站">
-  <title>春雪如初</title>
+  <meta name="description" content="Wayne &amp; Sophia Wedding">
+  <meta property="og:title" content="Wayne &amp; Sophia Wedding">
+  <meta property="og:description" content="春雪如初">
+  <meta property="og:type" content="website">
+  <title>Wayne &amp; Sophia Wedding</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f7fbfd'/%3E%3Cg stroke='%234d687b' stroke-width='4' stroke-linecap='round'%3E%3Cpath d='M32 8v48M11.2 20l41.6 24M11.2 44l41.6-24'/%3E%3Cpath d='M32 8l-6 7m6-7 6 7M32 56l-6-7m6 7 6-7M11.2 20l9.1.9m-9.1-.9 3.2-8.6M52.8 44l-9.1-.9m9.1.9-3.2 8.6M11.2 44l9.1-.9m-9.1.9 3.2 8.6M52.8 20l-9.1.9m9.1-.9-3.2-8.6'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
@@ -163,6 +167,12 @@
       .message-name{min-width:0;overflow-wrap:anywhere}
       .message-time{flex:0 0 auto;margin-left:auto;font-size:12px;letter-spacing:.04em}
       .message-more{width:100%;justify-content:center}
+      .yuki-moments-card{margin-top:26px;padding:22px 20px}
+      .moments-page{width:min(100% - 24px,680px);padding-top:18px}
+      .moments-header{padding:10px 8px 38px}
+      .moments-list{gap:48px}
+      .moment-photo{border-radius:22px}
+      .moment-title{font-size:21px}
     }
 
     .guestbook-section{width:min(920px,calc(100% - 40px));margin:auto;padding:118px 0}
@@ -233,6 +243,40 @@
       from{opacity:0;transform:translateY(14px)}
       to{opacity:1;transform:none}
     }
+    .yuki-moments-card{
+      width:100%;margin-top:34px;padding:24px 26px;border:1px solid var(--line);border-radius:22px;
+      background:linear-gradient(135deg,rgba(247,251,253,.94),rgba(255,255,255,.96));
+      color:var(--ink);text-align:left;cursor:pointer;box-shadow:0 15px 38px rgba(78,108,129,.07);
+      transition:transform .25s ease,box-shadow .25s ease,background .25s ease
+    }
+    .yuki-moments-card:hover{transform:translateY(-2px);box-shadow:0 20px 44px rgba(78,108,129,.11);background:#fff}
+    .yuki-moments-paw{display:block;margin-bottom:9px;font-size:17px;opacity:.48}
+    .yuki-moments-title{display:block;font-size:19px;letter-spacing:.09em;color:var(--deep)}
+    .yuki-moments-sub{display:block;margin-top:5px;font-size:13px;letter-spacing:.05em;color:#819aaa}
+    .yuki-moments-link{display:block;margin-top:17px;font-size:13px;letter-spacing:.09em;color:#68869a}
+
+    .moments-modal{position:fixed;inset:0;z-index:130;display:none;background:rgba(239,246,250,.72);backdrop-filter:blur(10px);overflow-y:auto;overscroll-behavior:contain}
+    .moments-modal.open{display:block;animation:momentsFade .38s ease both}
+    @keyframes momentsFade{from{opacity:0}to{opacity:1}}
+    .moments-page{width:min(820px,calc(100% - 36px));min-height:100%;margin:0 auto;padding:42px 0 90px}
+    .moments-top{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;padding:8px 0 18px;background:linear-gradient(180deg,rgba(247,251,253,.97) 0%,rgba(247,251,253,.86) 68%,transparent 100%)}
+    .moments-close{width:44px;height:44px;border:1px solid rgba(73,101,121,.18);border-radius:50%;background:rgba(255,255,255,.9);color:#617d91;cursor:pointer;font-size:24px;line-height:1}
+    .moments-header{text-align:center;padding:18px 16px 54px}
+    .moments-header .paw{display:block;font-size:20px;opacity:.35;margin-bottom:12px}
+    .moments-header h2{margin:0;font-family:"Cormorant Garamond","LXGW WenKai TC",serif;font-size:clamp(38px,6vw,62px);font-weight:400;letter-spacing:.08em;color:var(--deep)}
+    .moments-header p{margin:12px 0 0;font-size:14px;letter-spacing:.11em;color:#819aaa}
+    .moments-list{display:grid;gap:62px}
+    .moment-item{position:relative;text-align:center}
+    .moment-photo{width:min(620px,100%);aspect-ratio:4/3;margin:0 auto;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#edf6fb,#d6e7f1);box-shadow:0 22px 55px rgba(78,108,129,.11)}
+    .moment-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .moment-photo img.is-missing{display:none}
+    .moment-placeholder{height:100%;display:grid;place-items:center;padding:24px;color:#7e98aa;font-size:14px;letter-spacing:.08em}
+    .moment-date{margin:24px 0 0;font-family:"Cormorant Garamond",serif;font-size:17px;letter-spacing:.16em;color:#7793a6}
+    .moment-title{margin:8px 0 0;font-size:23px;font-weight:400;letter-spacing:.08em;color:var(--deep)}
+    .moment-note{margin:10px auto 0;max-width:540px;font-size:15px;line-height:2;color:var(--ink)}
+    .moment-divider{width:1px;height:48px;margin:38px auto 0;background:linear-gradient(var(--mist),transparent)}
+    .moment-item:last-child .moment-divider{display:none}
+
     .blessing-modal{
       position:fixed;inset:0;z-index:140;display:none;place-items:center;
       padding:22px;background:rgba(32,47,58,.32);backdrop-filter:blur(7px)
@@ -260,17 +304,18 @@
     .blessing-dialog p{
       margin:20px 0 0;font-size:16px;line-height:2;color:var(--ink)
     }
-    .paw-trail{position:absolute;left:18px;right:18px;bottom:16px;height:38px;display:none;pointer-events:none}
+    .paw-trail{position:absolute;left:22%;right:22%;bottom:14px;height:42px;display:none;pointer-events:none}
     .paw-trail.play{display:block}
-    .paw-print{position:absolute;left:-34px;bottom:0;font-size:18px;opacity:0;filter:grayscale(1);color:#8ea8ba;animation:pawRun 1.7s ease-out forwards}
-    .paw-print:nth-child(2){animation-delay:.22s;bottom:10px;transform:rotate(14deg)}
-    .paw-print:nth-child(3){animation-delay:.44s;bottom:1px;transform:rotate(-10deg)}
-    .paw-print:nth-child(4){animation-delay:.66s;bottom:11px;transform:rotate(12deg)}
-    @keyframes pawRun{
-      0%{left:-34px;opacity:0}
-      15%{opacity:.17}
-      70%{opacity:.13}
-      100%{left:calc(100% + 8px);opacity:0}
+    .paw-print{position:absolute;bottom:2px;font-size:17px;opacity:0;filter:grayscale(1);color:#8ea8ba;animation:pawStep 1.25s ease-in-out forwards}
+    .paw-print:nth-child(1){left:4%;animation-delay:.05s;transform:rotate(-9deg)}
+    .paw-print:nth-child(2){left:33%;bottom:13px;animation-delay:.58s;transform:rotate(12deg)}
+    .paw-print:nth-child(3){left:61%;animation-delay:1.11s;transform:rotate(-8deg)}
+    .paw-print:nth-child(4){left:88%;bottom:13px;animation-delay:1.64s;transform:rotate(11deg)}
+    @keyframes pawStep{
+      0%{opacity:0;transform:translateY(5px) scale(.86)}
+      26%{opacity:.19;transform:translateY(0) scale(1)}
+      72%{opacity:.15}
+      100%{opacity:0;transform:translateY(-1px) scale(.98)}
     }
     .blessing-close{
       margin-top:26px;padding:10px 28px;border:1px solid rgba(73,101,121,.22);
@@ -316,7 +361,7 @@
           <button class="gallery-control prev" type="button" aria-label="上一張">‹</button>
           <button class="gallery-control next" type="button" aria-label="下一張">›</button>
         </div>
-        <div class="gallery-meta"><div class="dots"></div><span class="counter">1 / 6</span></div>
+        <div class="gallery-meta"><div class="dots"></div><span class="counter">1 / 5</span></div>
       </div>
     </section>
 
@@ -340,6 +385,12 @@
           <h3>與雪相伴　共度朝夕</h3>
           <p class="jp-sub">雪のある日々を　重ねてゆく</p>
           <p class="body-copy">Yuki 是我們生活裡最柔軟的陪伴<br>也是這場婚禮不可缺席的小小家人<br>從散步　旅行　到每一個平凡日常<br>她陪著我們慢慢把生活變成家的模樣</p>
+          <button class="yuki-moments-card" id="openYukiMoments" type="button">
+            <span class="yuki-moments-paw" aria-hidden="true">🐾</span>
+            <span class="yuki-moments-title">Yuki 的重點小時刻</span>
+            <span class="yuki-moments-sub">陪伴我們的每一天　都成為家的模樣</span>
+            <span class="yuki-moments-link">翻開她的小小足跡　→</span>
+          </button>
         </div>
       </div>
     </section>
@@ -405,6 +456,21 @@
 
 
 
+
+  <div class="moments-modal" id="yukiMomentsModal" aria-hidden="true">
+    <div class="moments-page" role="dialog" aria-modal="true" aria-labelledby="momentsTitle">
+      <div class="moments-top">
+        <button class="moments-close" id="closeYukiMoments" type="button" aria-label="關閉 Yuki 的重點小時刻">×</button>
+      </div>
+      <header class="moments-header">
+        <span class="paw" aria-hidden="true">🐾</span>
+        <h2 id="momentsTitle">Yuki 的重點小時刻</h2>
+        <p>一起走過的日子　慢慢成為家的模樣</p>
+      </header>
+      <div class="moments-list" id="yukiMomentsList"></div>
+    </div>
+  </div>
+
   <div class="blessing-modal" id="blessingModal" aria-hidden="true">
     <div class="blessing-dialog" role="dialog" aria-modal="true" aria-labelledby="blessingTitle">
       <span class="blessing-icon" id="blessingIcon">❄️</span>
@@ -444,8 +510,17 @@
 
     const galleries = {
       wedding: ["wedding01.jpg","wedding02.jpg","wedding03.jpg","wedding04.jpg","wedding05.jpg"],
-      yuki: ["yuki/yuki01.jpg","yuki/yuki02.JPG","yuki/yuki03.jpg","yuki/yuki04.JPG","yuki/yuki05.JPG","yuki/yuki06.JPG"]
+      yuki: ["yuki/yuki01.jpg","yuki/yuki02.JPG","yuki/yuki03.jpg","yuki/yuki04.JPG","yuki/yuki05.JPG"]
     };
+
+    // Yuki 重點小時刻：替換下方照片檔名、日期與文字即可。
+    const yukiMoments = [
+      { photo:"yuki/moments/moment01.jpg", date:"2021.08.29", title:"Yuki 來了", note:"從這一天開始，我們變成三個人的家。" },
+      { photo:"yuki/moments/moment02.jpg", date:"2021.09.05", title:"第一次一起出門", note:"小小的腳步，陪我們走進更多日常。" },
+      { photo:"yuki/moments/moment03.jpg", date:"2022.03.12", title:"第一次一起旅行", note:"有 Yuki 在的地方，旅途也像家。" },
+      { photo:"yuki/moments/moment04.jpg", date:"2024.06.01", title:"陪我們留下重要的照片", note:"每一個重要時刻，都想讓她一起參與。" },
+      { photo:"yuki/moments/moment05.jpg", date:"2027.03.06", title:"一起迎接婚禮這一天", note:"我們最重要的小小家人，當然不能缺席。" }
+    ];
 
     const galleryStates = {};
 
@@ -506,6 +581,55 @@
 
     document.querySelectorAll("[data-gallery]").forEach(buildGallery);
 
+
+    const yukiMomentsModal = document.getElementById("yukiMomentsModal");
+    const yukiMomentsList = document.getElementById("yukiMomentsList");
+    const openYukiMoments = document.getElementById("openYukiMoments");
+    const closeYukiMoments = document.getElementById("closeYukiMoments");
+    let pageScrollBeforeMoments = 0;
+
+    function renderYukiMoments(){
+      yukiMomentsList.replaceChildren();
+      yukiMoments.forEach(moment=>{
+        const item=document.createElement("article");
+        item.className="moment-item";
+        item.innerHTML=`
+          <div class="moment-photo">
+            <img src="${moment.photo}" alt="${moment.title}" loading="lazy">
+            <div class="moment-placeholder">請放入 ${moment.photo}</div>
+          </div>
+          <p class="moment-date">${moment.date}</p>
+          <h3 class="moment-title">${moment.title}</h3>
+          ${moment.note ? `<p class="moment-note">${moment.note}</p>` : ""}
+          <div class="moment-divider" aria-hidden="true"></div>`;
+        const img=item.querySelector("img");
+        const placeholder=item.querySelector(".moment-placeholder");
+        img.addEventListener("load",()=>placeholder.remove());
+        img.addEventListener("error",()=>img.classList.add("is-missing"));
+        yukiMomentsList.appendChild(item);
+      });
+    }
+
+    function showYukiMoments(){
+      pageScrollBeforeMoments=window.scrollY;
+      yukiMomentsModal.classList.add("open");
+      yukiMomentsModal.setAttribute("aria-hidden","false");
+      document.body.style.overflow="hidden";
+      yukiMomentsModal.scrollTop=0;
+      closeYukiMoments.focus({preventScroll:true});
+    }
+    function hideYukiMoments(){
+      yukiMomentsModal.classList.remove("open");
+      yukiMomentsModal.setAttribute("aria-hidden","true");
+      document.body.style.overflow="";
+      window.scrollTo(0,pageScrollBeforeMoments);
+      openYukiMoments.focus({preventScroll:true});
+    }
+    renderYukiMoments();
+    openYukiMoments?.addEventListener("click",showYukiMoments);
+    closeYukiMoments?.addEventListener("click",hideYukiMoments);
+    yukiMomentsModal?.addEventListener("click",event=>{if(event.target===yukiMomentsModal) hideYukiMoments()});
+    document.addEventListener("keydown",event=>{if(event.key==="Escape" && yukiMomentsModal.classList.contains("open")) hideYukiMoments()});
 
     const guestbookForm = document.getElementById("guestbookForm");
     const guestbookSubmit = document.getElementById("guestbookSubmit");
