@@ -1,63 +1,79 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wayne & Sophia Wedding</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>春雪如初｜Wayne & Sophia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="hero">
-    <div class="snow">❄︎</div>
-    <p class="kicker">春雪如初</p>
-    <h1>Wayne & Sophia</h1>
-    <p class="subtitle">與雪相伴，共度朝夕。</p>
+<div class="snow" aria-hidden="true"><i>❄</i><i>✦</i><i>❄</i><i>✦</i><i>❄</i></div>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="logo">WS</div>
+    <p class="en">Spring Snow, As It First Was</p>
+    <h1>春雪如初</h1>
+    <p class="names">Wayne <span>&</span> Sophia</p>
+    <p class="tagline">與雪相伴，共度朝夕。</p>
     <p class="date">2027.03.06</p>
-    <a class="button" href="#rsvp">填寫出席回覆</a>
-  </header>
+    <a class="scroll" href="#story">Scroll<b></b></a>
+  </div>
+</header>
 
-  <main>
-    <section class="card">
-      <h2>婚禮資訊</h2>
-      <p>誠摯邀請你，一起參與我們與 Yuki 的重要日子。</p>
-      <div class="info">
-        <div><strong>日期</strong><span>2027 / 03 / 06</span></div>
-        <div><strong>地點</strong><span>孫立人將軍官邸</span></div>
-        <div><strong>主題</strong><span>藍白日系・春雪</span></div>
-      </div>
-    </section>
+<main>
+<section class="chapter story" id="story">
+  <p class="chapter-no">Chapter 01</p>
+  <div class="heading">
+    <div><p class="en">Our Story</p><h2>我們</h2></div>
+    <p>從相遇、相伴，到與 Yuki 一起生活。<br>謝謝你，成為我們故事裡溫柔的一頁。</p>
+  </div>
+  <div class="photo"><span>PHOTO<small>之後放你們最喜歡的婚紗照</small></span></div>
+</section>
 
-    <section class="grid">
-      <a class="mini" href="#story">我們</a>
-      <a class="mini" href="#seating">座位</a>
-      <a class="mini" href="#traffic">交通</a>
-      <a class="mini" href="#invite">喜帖</a>
-    </section>
+<section class="chapter info">
+  <p class="chapter-no">Chapter 02</p>
+  <div class="center"><p class="en">Wedding Day</p><h2>婚禮資訊</h2></div>
+  <div class="details">
+    <article><small>01</small><h3>Date</h3><p>2027 年 3 月 6 日</p></article>
+    <article><small>02</small><h3>Venue</h3><p>孫立人將軍官邸</p></article>
+    <article><small>03</small><h3>Theme</h3><p>春雪如初・藍白日系</p></article>
+  </div>
+</section>
 
-    <section id="story" class="card">
-      <h2>我們的故事</h2>
-      <p>從相遇、相伴，到帶著 Yuki 一起走向新的日常。謝謝你成為我們生命裡溫柔的一部分。</p>
-    </section>
+<section class="chapter yuki">
+  <p class="chapter-no">Chapter 03</p>
+  <div class="yuki-grid">
+    <svg viewBox="0 0 300 220" aria-label="Yuki 線稿">
+      <path d="M48 150C62 105 84 66 118 54C139 46 165 54 178 72C194 94 193 123 178 142C165 159 142 169 120 166C91 162 68 167 50 181"/>
+      <path d="M112 54C98 34 77 27 63 39C57 46 61 65 75 78M176 74C191 59 210 58 218 71C224 82 215 101 196 111"/>
+      <circle cx="143" cy="96" r="4"/>
+      <path d="M171 112C181 110 188 114 190 119C184 128 173 132 164 127M166 128C162 141 148 148 137 147"/>
+    </svg>
+    <div><p class="en">With Yuki</p><h2>我們的家</h2><p>婚禮不只是兩個人的一天，也是我們和 Yuki 一起走向下一段日常。</p></div>
+  </div>
+</section>
 
-    <section id="traffic" class="card">
-      <h2>交通資訊</h2>
-      <p>婚禮地點與交通方式會陸續更新。建議賓客預留停車與步行時間。</p>
-    </section>
+<section class="chapter nav">
+  <p class="chapter-no">Explore</p>
+  <div class="nav-grid">
+    <a href="#story"><small>01</small><strong>我們</strong><span>Our Story</span></a>
+    <a href="#"><small>02</small><strong>座位</strong><span>Seating</span></a>
+    <a href="#"><small>03</small><strong>交通</strong><span>Access</span></a>
+    <a href="#"><small>04</small><strong>喜帖</strong><span>Invitation</span></a>
+  </div>
+</section>
 
-    <section id="seating" class="card">
-      <h2>座位安排</h2>
-      <p>座位資訊確認後會放在這裡，也可以設計成搜尋姓名查座位。</p>
-    </section>
+<section class="closing">
+  <p class="en">For our family & friends</p>
+  <h2>謝謝你們陪我們走到今天。</h2>
+  <p class="love">Love,<br><strong>Wayne · Sophia · Yuki</strong></p>
+</section>
+</main>
 
-    <section id="rsvp" class="card">
-      <h2>出席回覆</h2>
-      <p>之後可放 Google 表單連結。</p>
-      <a class="button light" href="#" target="_blank">前往 RSVP 表單</a>
-    </section>
-  </main>
-
-  <footer>
-    <p>Wayne · Sophia · Yuki</p>
-  </footer>
+<footer><a href="#top">Back to top</a><span>2027.03.06</span></footer>
 </body>
 </html>
