@@ -155,7 +155,11 @@
       .guestbook-section{width:min(100% - 32px,680px);padding:88px 0}
       .guestbook-card{padding:30px 22px;border-radius:24px}
       .guestbook-row{grid-template-columns:1fr}
-      .message-list{grid-template-columns:1fr}
+      .message-list{grid-template-columns:1fr!important}
+      .message-card{padding:38px 20px 22px}
+      .message-head{align-items:flex-start;gap:10px;flex-wrap:wrap}
+      .message-name{min-width:0;overflow-wrap:anywhere}
+      .message-time{flex:0 0 auto;margin-left:auto;font-size:12px;letter-spacing:.04em}
       .message-more{width:100%;justify-content:center}
     }
 
@@ -215,6 +219,14 @@
       break-inside:avoid;
       animation:messageFade .7s ease both;
     }
+    @media(max-width:780px){
+      .message-list{grid-template-columns:1fr!important}
+      .message-card{width:100%;padding:38px 20px 22px}
+      .message-head{align-items:flex-start;gap:10px;flex-wrap:wrap}
+      .message-name{min-width:0;overflow-wrap:anywhere}
+      .message-time{flex:0 0 auto;margin-left:auto;max-width:none;font-size:12px;letter-spacing:.03em;text-align:right}
+      .message-text{font-size:15px;line-height:1.85}
+    }
     @keyframes messageFade{
       from{opacity:0;transform:translateY(14px)}
       to{opacity:1;transform:none}
@@ -260,8 +272,11 @@
     }
     .blessing-close{
       margin-top:26px;padding:10px 28px;border:1px solid rgba(73,101,121,.22);
-      border-radius:999px;background:#f6fafc;color:#567287;cursor:pointer
+      border-radius:999px;background:#f6fafc;color:#567287;cursor:pointer;
+      opacity:0;transform:translateY(8px);pointer-events:none;
+      transition:opacity .35s ease,transform .35s ease,background .2s ease
     }
+    .blessing-close.show{opacity:1;transform:none;pointer-events:auto}
     .blessing-close:hover{background:#edf5fa}
 
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
@@ -509,28 +524,39 @@
       {icon:"🌿", lines:["我們會帶著這份祝福","迎接每一個春天"]},
       {icon:"💍", lines:["你的心意","已經悄悄收藏"]},
       {icon:"🐶", lines:["願今天的美好","也陪伴著你"]},
+      {icon:"❄️", lines:["願這份溫暖","陪伴我們走向未來"]},
+      {icon:"🌿", lines:["今天的笑容","我們會一直記得"]},
       {icon:"💍", lines:["你的寄語","成為今天最美好的風景"]},
       {icon:"🐶", lines:["Yuki 搖著尾巴","收下你的祝福 🐾"], yuki:true}
     ];
 
     let allMessages = [];
-    let visibleMessageCount = 3;
+    const defaultVisibleMessageCount = ()=>window.matchMedia("(max-width: 780px)").matches ? 1 : 2;
+    let visibleMessageCount = defaultVisibleMessageCount();
+    let blessingButtonTimer = null;
 
     function openBlessingModal(){
       const response = BLESSING_RESPONSES[Math.floor(Math.random()*BLESSING_RESPONSES.length)];
       blessingIcon.textContent = response.icon;
       blessingMessage.innerHTML = response.lines.map(escapeHtml).join("<br>");
       pawTrail.classList.remove("play");
+      blessingClose.classList.remove("show");
+      clearTimeout(blessingButtonTimer);
       blessingModal.classList.add("open");
       blessingModal.setAttribute("aria-hidden","false");
       if(response.yuki){
         void pawTrail.offsetWidth;
         pawTrail.classList.add("play");
       }
-      blessingClose.focus();
+      blessingButtonTimer = setTimeout(()=>{
+        blessingClose.classList.add("show");
+        blessingClose.focus({preventScroll:true});
+      },2000);
     }
 
     function closeBlessingModal(){
+      clearTimeout(blessingButtonTimer);
+      blessingClose.classList.remove("show");
       blessingModal.classList.remove("open");
       blessingModal.setAttribute("aria-hidden","true");
       pawTrail.classList.remove("play");
@@ -570,7 +596,7 @@
 
     function updateMessageMore(){
       const total = allMessages.length;
-      if(total <= 3){
+      if(total <= defaultVisibleMessageCount()){
         messageMore.classList.remove("show","is-collapse");
         messageMore.setAttribute("aria-expanded","false");
         return;
@@ -633,22 +659,35 @@
     }
 
     function renderMessages(snapshot){
-      guestbookCount.textContent = `共 ${snapshot.size} 則寄語`;
-      allMessages = snapshot.docs.map(docSnapshot=>({
-        id: docSnapshot.id,
-        data: docSnapshot.data()
-      }));
-      visibleMessageCount = Math.min(Math.max(visibleMessageCount,3), Math.max(allMessages.length,3));
+      // 後台將 isHidden 設為 true 時，該則寄語不會顯示在網站上。
+      // 舊留言若沒有 isHidden 欄位，仍會正常顯示。
+      allMessages = snapshot.docs
+        .map(docSnapshot=>({
+          id: docSnapshot.id,
+          data: docSnapshot.data()
+        }))
+        .filter(item=>item.data.isHidden !== true);
+      guestbookCount.textContent = `共 ${allMessages.length} 則寄語`;
+      const defaultCount = defaultVisibleMessageCount();
+      visibleMessageCount = Math.min(Math.max(visibleMessageCount,defaultCount), Math.max(allMessages.length,defaultCount));
       renderVisibleMessages();
     }
 
     messageMore?.addEventListener("click",()=>{
       if(visibleMessageCount >= allMessages.length){
-        visibleMessageCount = 3;
+        visibleMessageCount = defaultVisibleMessageCount();
         renderVisibleMessages();
         document.querySelector(".guestbook-summary")?.scrollIntoView({behavior:"smooth",block:"start"});
       }else{
         visibleMessageCount = Math.min(visibleMessageCount + 3, allMessages.length);
+        renderVisibleMessages();
+      }
+    });
+
+    const messageLayoutQuery = window.matchMedia("(max-width: 780px)");
+    messageLayoutQuery.addEventListener?.("change",()=>{
+      if(visibleMessageCount <= 2){
+        visibleMessageCount = defaultVisibleMessageCount();
         renderVisibleMessages();
       }
     });
@@ -686,7 +725,8 @@
         await addDoc(messagesRef, {
           name: name || "匿名",
           message,
-          createdAt: serverTimestamp()
+          createdAt: serverTimestamp(),
+          isHidden: false
         });
         guestbookForm.reset();
         setGuestbookStatus("");
