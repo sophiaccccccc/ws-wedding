@@ -31,3 +31,97 @@ body{
 .tagline,.heading>p,.details p,.yuki-grid div p:last-child,.closing h2{
   letter-spacing:.06em;
 }
+
+
+/* Homepage V3 — logo-led, softer and more handwritten */
+.hero{
+  min-height:100svh;
+  padding:44px 24px 34px;
+  background:
+    radial-gradient(circle at 22% 16%, rgba(215,232,243,.48), transparent 28%),
+    radial-gradient(circle at 83% 30%, rgba(234,244,250,.74), transparent 34%),
+    linear-gradient(180deg,#f7fbfe 0%,#ffffff 62%,#f6fafc 100%);
+}
+.hero::after{
+  inset:20px;
+  border-color:rgba(107,143,169,.17);
+}
+.hero-inner{
+  width:min(760px,100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.hero-logo{
+  display:block;
+  width:min(390px,76vw);
+  height:auto;
+  margin:0 auto clamp(18px,3vh,34px);
+  mix-blend-mode:multiply;
+  filter:contrast(.97) saturate(.88);
+}
+.hero-title-group{
+  text-align:center;
+  margin-bottom:clamp(18px,3vh,34px);
+}
+.hero h1{
+  font-family:"LXGW WenKai TC",cursive;
+  font-size:clamp(42px,6.5vw,72px);
+  font-weight:400;
+  line-height:1.25;
+  letter-spacing:.22em;
+  margin:0;
+  transform:translateX(.11em);
+  color:#425d72;
+}
+.japanese{
+  margin:8px 0 0;
+  font-family:"LXGW WenKai TC",cursive;
+  font-size:clamp(15px,2vw,20px);
+  font-weight:300;
+  letter-spacing:.22em;
+  color:#7896ab;
+}
+.hero .names{
+  margin:0;
+  font-size:clamp(25px,3.4vw,38px);
+  letter-spacing:.1em;
+  color:#4c6679;
+}
+.hero .names span{
+  margin:0 .42em;
+  color:#91acbf;
+}
+.hero .tagline{
+  margin:clamp(15px,2.4vh,24px) 0 0;
+  font-family:"LXGW WenKai TC",cursive;
+  font-size:clamp(16px,2vw,20px);
+  letter-spacing:.14em;
+  color:#58758a;
+}
+.hero .date{
+  margin:clamp(20px,3vh,34px) 0 clamp(14px,2vh,22px);
+  font-size:15px;
+  letter-spacing:.2em;
+  color:#819daf;
+}
+.hero .scroll{
+  height:54px;
+  width:24px;
+  justify-content:flex-start;
+  gap:0;
+}
+.hero .scroll b{
+  height:48px;
+  background:linear-gradient(#8ca7ba,transparent);
+  animation:pulse 2.2s ease-in-out infinite;
+}
+@media(max-width:520px){
+  .hero{padding-top:34px}
+  .hero::after{inset:10px}
+  .hero-logo{width:min(320px,82vw);margin-bottom:18px}
+  .hero h1{font-size:44px;letter-spacing:.18em;transform:translateX(.09em)}
+  .japanese{font-size:15px}
+  .hero .tagline{font-size:16px}
+}
