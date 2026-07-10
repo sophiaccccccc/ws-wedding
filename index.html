@@ -49,12 +49,14 @@
       linear-gradient(180deg,#f7fbfe 0%,#fff 72%,#f8fbfd 100%)}
     .hero-inner{width:min(900px,100%);text-align:center;display:flex;flex-direction:column;align-items:center;animation:fadeUp 1.2s ease both}
     .hero-logo{display:block;width:min(385px,72vw);height:auto;margin:0 auto 24px}
-    .names{margin:0;font-family:"Cormorant Garamond",serif;font-size:clamp(31px,4.4vw,46px);letter-spacing:.08em;color:#526d80;white-space:nowrap}
+    .names{margin:0;font-family:"Cormorant Garamond",serif;font-size:clamp(34px,4.8vw,50px);letter-spacing:.08em;color:#526d80;white-space:nowrap}
     .name-snow{font-size:.56em;color:#91aabd;margin:0 .42em;vertical-align:.08em}
-    .hero-title-row{margin-top:23px;display:flex;align-items:baseline;justify-content:center;gap:24px;white-space:nowrap}
-    .date{font-family:"Cormorant Garamond",serif;font-size:clamp(24px,3vw,35px);letter-spacing:.16em;color:#6e8ca1}
-    .hero h1{margin:0;font-size:clamp(42px,6.2vw,70px);font-weight:400;letter-spacing:.13em;line-height:1.2;color:var(--deep)}
+    .hero-title-row{margin-top:48px;display:flex;align-items:baseline;justify-content:center;gap:24px;white-space:nowrap}
+    .date{font-family:"Cormorant Garamond",serif;font-size:clamp(30px,4.2vw,46px);letter-spacing:.10em;color:#6e8ca1;line-height:1.2}
+    .hero h1{margin:0;font-size:clamp(30px,4.2vw,46px);font-weight:400;letter-spacing:.10em;line-height:1.2;color:var(--deep)}
     .jp-title{margin:10px 0 0;font-size:clamp(14px,1.7vw,18px);letter-spacing:.17em;color:#7895aa}
+    .hero-venue{margin:18px 0 0;font-size:14px;letter-spacing:.10em;color:#7894a6}
+    .hero-venue::before{content:"";display:block;width:38px;height:1px;margin:0 auto 13px;background:rgba(110,140,161,.28)}
     .scroll-cue{margin-top:28px;text-decoration:none;font-family:"Cormorant Garamond",serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8ba3b5;display:flex;flex-direction:column;align-items:center;gap:8px}
     .scroll-cue::after{content:"";width:1px;height:45px;background:linear-gradient(#91a8b8,transparent);animation:breathe 1.8s ease-in-out infinite}
     @keyframes breathe{50%{transform:translateY(7px);opacity:.45}}
@@ -137,10 +139,11 @@
     @media(max-width:780px){
       .hero{padding:42px 18px 30px}
       .hero-logo{width:min(295px,78vw);margin-bottom:18px}
-      .names{font-size:31px}
-      .hero-title-row{gap:11px;margin-top:19px}
-      .date{font-size:19px;letter-spacing:.10em}
-      .hero h1{font-size:34px;letter-spacing:.10em}
+      .names{font-size:34px}
+      .hero-title-row{gap:11px;margin-top:34px}
+      .date,.hero h1{font-size:25px;letter-spacing:.08em}
+      .hero-title-row{gap:12px}
+      .hero-venue{margin-top:16px;font-size:12px;letter-spacing:.06em;white-space:nowrap}
       .jp-title{font-size:13px;letter-spacing:.12em}
       .section{width:min(100% - 32px,680px);padding:88px 0}
       .story-intro,.yuki-layout{grid-template-columns:1fr;gap:28px}
@@ -339,39 +342,37 @@
     .opening-cover.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
     .opening-inner{position:relative;width:min(520px,100%);text-align:center;padding-top:92px}
     .opening-snowflake{
-      position:absolute;left:50%;top:-38vh;
-      font-size:44px;line-height:1;color:#6f8fa5;text-shadow:0 0 22px rgba(149,184,207,.42);
-      transform:translateX(-50%) scale(.28) rotate(-24deg);
-      transform-origin:center;
-      animation:openingSnowFall 3.8s cubic-bezier(.18,.66,.22,1) forwards,
-                openingSnowFloat 4.8s ease-in-out 3.85s infinite
+      position:absolute;left:50%;top:18px;
+      font-size:44px;line-height:1;color:#6f8fa5;text-shadow:0 0 18px rgba(149,184,207,.34);
+      opacity:0;transform:translate3d(calc(-50% - 14px),-48vh,0) scale(.42) rotate(-18deg);
+      transform-origin:center;will-change:transform,opacity;
+      backface-visibility:hidden;-webkit-backface-visibility:hidden;
+      animation:openingSnowFall 3.45s linear forwards,
+                openingSnowFloat 5.2s ease-in-out 3.5s infinite
     }
     @keyframes openingSnowFall{
-      0%{top:-38vh;opacity:0;transform:translateX(-50%) translateX(-34px) scale(.28) rotate(-42deg);filter:blur(1.8px)}
-      12%{opacity:.45}
-      34%{opacity:.78;transform:translateX(-50%) translateX(28px) scale(.48) rotate(8deg);filter:blur(1.1px)}
-      62%{opacity:.95;transform:translateX(-50%) translateX(-16px) scale(.78) rotate(54deg);filter:blur(.45px)}
-      84%{transform:translateX(-50%) translateX(8px) scale(1.02) rotate(82deg);filter:blur(0)}
-      100%{top:18px;opacity:1;transform:translateX(-50%) scale(1.18) rotate(96deg);filter:blur(0)}
+      0%{opacity:0;transform:translate3d(calc(-50% - 14px),-48vh,0) scale(.42) rotate(-18deg)}
+      50%{opacity:.88;transform:translate3d(calc(-50% + 10px),-23vh,0) scale(.76) rotate(14deg)}
+      100%{opacity:1;transform:translate3d(-50%,0,0) scale(1.18) rotate(34deg)}
     }
     @keyframes openingSnowFloat{
-      0%,100%{transform:translateX(-50%) scale(1.18) translateY(0) rotate(96deg)}
-      50%{transform:translateX(-50%) scale(1.18) translateY(4px) rotate(100deg)}
+      0%,100%{transform:translate3d(-50%,0,0) scale(1.18) rotate(34deg)}
+      50%{transform:translate3d(calc(-50% + 2px),3px,0) scale(1.18) rotate(37deg)}
     }
     .opening-title,.opening-subtitle,.opening-enter{opacity:0;transform:translateY(10px)}
     .opening-title{
       margin:16px 0 0;font-size:clamp(22px,4.2vw,30px);font-weight:400;letter-spacing:.16em;color:var(--deep);
-      animation:openingTextIn 1.15s ease 4.75s forwards
+      animation:openingTextIn .95s ease 3.95s forwards
     }
     .opening-subtitle{
       margin:12px 0 0;font-size:clamp(13px,2.6vw,16px);letter-spacing:.14em;color:#7895aa;
-      animation:openingTextIn 1.15s ease 6.35s forwards
+      animation:openingTextIn .95s ease 5.05s forwards
     }
     @keyframes openingTextIn{to{opacity:1;transform:none}}
     .opening-enter{
       margin-top:38px;padding:12px 10px;border:0;border-top:1px solid rgba(73,101,121,.22);border-bottom:1px solid rgba(73,101,121,.22);
       background:transparent;color:#567287;letter-spacing:.13em;cursor:pointer;
-      animation:openingTextIn 1.05s ease 8.15s forwards;
+      animation:openingTextIn .9s ease 6.25s forwards;
       transition:letter-spacing .3s ease,color .3s ease,border-color .3s ease
     }
     .opening-enter:hover{letter-spacing:.18em;color:var(--deep);border-color:rgba(73,101,121,.4)}
@@ -422,6 +423,7 @@
         <h1>春雪如初</h1>
       </div>
       <p class="jp-title">雪と芽吹く春</p>
+      <p class="hero-venue">孫立人將軍官邸（陸軍聯誼廳）</p>
       
     </div>
   </header>
@@ -469,7 +471,7 @@
           <button class="yuki-moments-card" id="openYukiMoments" type="button">
             <span class="yuki-moments-paw" aria-hidden="true">🐾</span>
             <span class="yuki-moments-title">Yuki 的重點小時刻</span>
-            <span class="yuki-moments-sub">從相遇的那一天起<br>每一步都是家的方向</span>
+            <span class="yuki-moments-sub">從相遇的那一天起　每一步都是家的方向</span>
             <span class="yuki-moments-link">翻開她的小小足跡　→</span>
           </button>
         </div>
@@ -572,6 +574,10 @@
   </div>
 
   <script>
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0,0);
+    window.addEventListener("load",()=>window.scrollTo(0,0),{once:true});
+
     (()=>{
       const cover=document.getElementById("openingCover");
       const enter=document.getElementById("openingEnter");
