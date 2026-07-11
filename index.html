@@ -47,7 +47,7 @@
       radial-gradient(circle at 16% 10%,rgba(211,230,242,.58),transparent 32%),
       radial-gradient(circle at 88% 24%,rgba(235,245,250,.9),transparent 36%),
       linear-gradient(180deg,#f7fbfe 0%,#fff 72%,#f8fbfd 100%)}
-    .hero-inner{width:min(900px,100%);text-align:center;display:flex;flex-direction:column;align-items:center;animation:fadeUp 1.2s ease both}
+    .hero-inner{width:min(900px,100%);text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;top:48px;animation:fadeUp 1.2s ease both}
     .hero-logo{display:block;width:min(385px,72vw);height:auto;margin:0 auto 24px}
     .names{margin:0;font-family:"Cormorant Garamond",serif;font-size:clamp(34px,4.8vw,50px);letter-spacing:.08em;color:#526d80;white-space:nowrap}
     .name-snow{font-size:.56em;color:#91aabd;margin:0 .42em;vertical-align:.08em}
@@ -55,7 +55,7 @@
     .date{font-family:"Cormorant Garamond",serif;font-size:clamp(30px,4.2vw,46px);letter-spacing:.10em;color:#6e8ca1;line-height:1.2}
     .hero h1{margin:0;font-size:clamp(30px,4.2vw,46px);font-weight:400;letter-spacing:.10em;line-height:1.2;color:var(--deep)}
     .jp-title{margin:10px 0 0;font-size:clamp(14px,1.7vw,18px);letter-spacing:.17em;color:#7895aa}
-    .hero-venue{margin:34px 0 0;font-size:14px;letter-spacing:.10em;color:#7894a6}
+    .hero-venue{margin:52px 0 0;font-size:14px;letter-spacing:.10em;color:#7894a6}
     .hero-venue::before{content:"";display:block;width:38px;height:1px;margin:0 auto 13px;background:rgba(110,140,161,.28)}
     .scroll-cue{margin-top:28px;text-decoration:none;font-family:"Cormorant Garamond",serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8ba3b5;display:flex;flex-direction:column;align-items:center;gap:8px}
     .scroll-cue::after{content:"";width:1px;height:45px;background:linear-gradient(#91a8b8,transparent);animation:breathe 1.8s ease-in-out infinite}
@@ -138,12 +138,13 @@
 
     @media(max-width:780px){
       .hero{padding:42px 18px 30px}
+      .hero-inner{top:36px}
       .hero-logo{width:min(295px,78vw);margin-bottom:18px}
       .names{font-size:34px}
       .hero-title-row{gap:11px;margin-top:34px}
       .date,.hero h1{font-size:25px;letter-spacing:.08em}
       .hero-title-row{gap:12px}
-      .hero-venue{margin-top:28px;font-size:12px;letter-spacing:.06em;white-space:nowrap}
+      .hero-venue{margin-top:42px;font-size:12px;letter-spacing:.06em;white-space:nowrap}
       .jp-title{font-size:13px;letter-spacing:.12em}
       .section{width:min(100% - 32px,680px);padding:88px 0}
       .story-intro,.yuki-layout{grid-template-columns:1fr;gap:28px}
@@ -216,6 +217,13 @@
     .message-relation{margin-left:8px;font-size:12px;color:#91a9ba}
     .message-text{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.9;color:var(--ink)}
     .message-empty{padding:28px;text-align:center;border:1px dashed var(--line);border-radius:20px;color:#8ca2b1}
+
+    .message-empty-wait::before{content:" ";}
+    @media(max-width:780px){
+      .message-empty-wait{display:block;margin-top:5px}
+      .message-empty-wait::before{content:""}
+    }
+
     .message-more-wrap{display:flex;justify-content:center;margin-top:24px}
     .message-more{display:none;align-items:center;gap:9px;padding:11px 24px;border:1px solid rgba(73,101,121,.18);border-radius:999px;background:rgba(247,251,253,.9);color:#637f93;cursor:pointer;letter-spacing:.08em}
     .message-more.show{display:inline-flex}
@@ -271,12 +279,13 @@
     .moments-list{display:grid;gap:62px}
     .moment-item{position:relative;text-align:center}
     .moment-photo{width:min(620px,100%);aspect-ratio:4/3;margin:0 auto;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#edf6fb,#d6e7f1);box-shadow:0 22px 55px rgba(78,108,129,.11)}
-    .moment-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .moment-photo img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
     .moment-photo img.is-missing{display:none}
     .moment-placeholder{height:100%;display:grid;place-items:center;padding:24px;color:#7e98aa;font-size:14px;letter-spacing:.08em}
-    .moment-date{margin:24px 0 0;font-family:"Cormorant Garamond",serif;font-size:17px;letter-spacing:.16em;color:#7793a6}
-    .moment-title{margin:8px 0 0;font-size:23px;font-weight:400;letter-spacing:.08em;color:var(--deep)}
-    .moment-note{margin:10px auto 0;max-width:540px;font-size:15px;line-height:2;color:var(--ink)}
+    .moment-number{margin:0 0 0;font-family:"Cormorant Garamond",serif;font-size:13px;letter-spacing:.24em;color:#a6b7c2}
+    .moment-date{margin:7px 0 18px;font-family:"Cormorant Garamond",serif;font-size:17px;letter-spacing:.16em;color:#7793a6}
+    .moment-title{margin:22px 0 0;font-size:23px;font-weight:400;letter-spacing:.08em;color:var(--deep)}
+    .moment-note{margin:10px auto 0;max-width:540px;font-size:15px;line-height:2;color:var(--ink);white-space:pre-line}
     .moment-divider{width:1px;height:48px;margin:38px auto 0;background:linear-gradient(var(--mist),transparent)}
     .moment-item:last-child .moment-divider{display:none}
 
@@ -337,9 +346,33 @@
       min-height:100svh;padding:28px;background:
       radial-gradient(circle at 50% 35%,rgba(220,236,246,.72),transparent 34%),
       linear-gradient(180deg,#f8fcfe 0%,#fff 70%,#f6fafc 100%);
-      overflow:hidden;transition:opacity 1s ease,visibility 1s ease
+      overflow:hidden;transition:opacity .72s ease,visibility .72s ease
     }
+    .opening-cover.is-button-leaving .opening-enter{
+      animation:none;opacity:0;transform:translateY(-4px);pointer-events:none
+    }
+    .opening-cover.is-text-leaving .opening-title,
+    .opening-cover.is-text-leaving .opening-subtitle{
+      animation:none;opacity:0;transform:translateY(-8px)
+    }
+    .opening-cover.is-snow-leaving .opening-snowflake{opacity:0;transform:translate3d(-50%,14px,0) scale(2.05) rotate(58deg)}
     .opening-cover.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+    .opening-inner{transition:opacity .9s ease,transform .9s ease}
+
+    body.opening-locked .hero-inner,
+    body.opening-locked .hero-inner > *{opacity:0!important;animation:none!important}
+    body.hero-entering .hero-inner{opacity:1}
+    body.hero-entering .hero-inner > *{animation:heroPieceIn 2.05s cubic-bezier(.16,.72,.28,1) both}
+    body.hero-entering .hero-logo{animation-delay:.15s}
+    body.hero-entering .names{animation-delay:.58s}
+    body.hero-entering .hero-title-row{animation-delay:1s}
+    body.hero-entering .jp-title{animation-delay:1.38s}
+    body.hero-entering .hero-venue{animation-delay:1.76s}
+    @keyframes heroPieceIn{
+      0%{opacity:0;transform:translateY(28px);filter:blur(4px)}
+      45%{opacity:.42;filter:blur(2px)}
+      100%{opacity:1;transform:none;filter:blur(0)}
+    }
     .opening-inner{position:relative;width:min(520px,100%);text-align:center;padding-top:92px}
     .opening-snowflake{
       position:absolute;left:50%;top:18px;
@@ -347,8 +380,9 @@
       opacity:0;transform:translate3d(calc(-50% - 14px),-48vh,0) scale(.42) rotate(-18deg);
       transform-origin:center;will-change:transform,opacity;
       backface-visibility:hidden;-webkit-backface-visibility:hidden;
-      animation:openingSnowFall 3.45s linear forwards,
-                openingSnowFloat 5.2s ease-in-out 3.5s infinite
+      animation:openingSnowFall 3.1s linear forwards,
+                openingSnowFloat 5.2s ease-in-out 3.15s infinite;
+      transition:opacity .72s ease,transform .9s cubic-bezier(.22,.61,.36,1)
     }
     @keyframes openingSnowFall{
       0%{opacity:0;transform:translate3d(calc(-50% - 14px),-48vh,0) scale(.42) rotate(-18deg)}
@@ -360,20 +394,21 @@
       50%{transform:translate3d(calc(-50% + 2px),3px,0) scale(1.18) rotate(37deg)}
     }
     .opening-title,.opening-subtitle,.opening-enter{opacity:0;transform:translateY(10px)}
+    .opening-title,.opening-subtitle{transition:opacity .58s ease,transform .58s ease}
     .opening-title{
       margin:16px 0 0;font-size:clamp(22px,4.2vw,30px);font-weight:400;letter-spacing:.16em;color:var(--deep);
-      animation:openingTextIn .95s ease 3.95s forwards
+      animation:openingTextIn .9s ease 3.55s forwards
     }
     .opening-subtitle{
       margin:12px 0 0;font-size:clamp(13px,2.6vw,16px);letter-spacing:.14em;color:#7895aa;
-      animation:openingTextIn .95s ease 5.05s forwards
+      animation:openingTextIn .9s ease 4.5s forwards
     }
     @keyframes openingTextIn{to{opacity:1;transform:none}}
     .opening-enter{
       margin-top:38px;padding:12px 10px;border:0;border-top:1px solid rgba(73,101,121,.22);border-bottom:1px solid rgba(73,101,121,.22);
       background:transparent;color:#567287;letter-spacing:.13em;cursor:pointer;
-      animation:openingTextIn .9s ease 6.25s forwards;
-      transition:letter-spacing .3s ease,color .3s ease,border-color .3s ease
+      animation:openingTextIn .85s ease 5.55s forwards;
+      transition:opacity .32s ease,transform .32s ease,letter-spacing .3s ease,color .3s ease,border-color .3s ease
     }
     .opening-enter:hover{letter-spacing:.18em;color:var(--deep);border-color:rgba(73,101,121,.4)}
     .opening-drift{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -487,7 +522,6 @@
 
       <div class="guestbook-card">
         <p class="guestbook-intro">你的祝福<br>將成為春天最溫柔的風景</p>
-
         <form class="guestbook-form" id="guestbookForm">
           <div class="guestbook-field">
             <label for="guestName">你的稱呼</label>
@@ -500,7 +534,7 @@
           </div>
 
           <button class="guestbook-submit" id="guestbookSubmit" type="submit">留下祝福</button>
-          <p class="guestbook-note">請留下你的稱呼與祝福<br>稱呼 30 字內｜寄語 300 字內</p>
+          <p class="guestbook-note">稱呼 30 字內｜寄語 300 字內</p>
           <p class="guestbook-status" id="guestbookStatus" role="status" aria-live="polite"></p>
         </form>
 
@@ -593,9 +627,46 @@
         drift.appendChild(flake);
       }
       enter?.addEventListener("click",()=>{
-        cover.classList.add("is-leaving");
-        document.body.classList.remove("opening-locked");
-        window.setTimeout(()=>cover.remove(),850);
+        enter.disabled=true;
+
+        // 第一段：按下後文字與按鈕立即、柔和地淡出。
+        cover.classList.add("is-button-leaving","is-text-leaving");
+
+        // 第二段：等文字退場後，中央雪花才開始往視線前方飄近。
+        window.setTimeout(()=>{
+          const snow=cover.querySelector(".opening-snowflake");
+          if(!snow) return;
+
+          const current=getComputedStyle(snow);
+          const fromTransform=current.transform;
+          const fromOpacity=current.opacity;
+          snow.style.animation="none";
+          snow.animate([
+            {transform:fromTransform,opacity:fromOpacity},
+            {transform:"translate3d(-50%,14px,0) scale(2.05) rotate(58deg)",opacity:0}
+          ],{
+            duration:820,
+            easing:"cubic-bezier(.2,.72,.2,1)",
+            fill:"forwards"
+          });
+        },650);
+
+        // 雪花移動一段後，開場背景再接著淡出，避免全部一起動得太急。
+        window.setTimeout(()=>{
+          cover.classList.add("is-leaving");
+        },1120);
+
+        // Hero 的速度與分層動畫完全維持原本設定。
+        window.setTimeout(()=>{
+          document.body.classList.remove("opening-locked");
+          document.body.classList.add("hero-entering");
+        },1450);
+
+        // 等 Hero 完整浮現後再清除開場與動畫狀態。
+        window.setTimeout(()=>{
+          cover.remove();
+          document.body.classList.remove("hero-entering");
+        },5850);
       });
     })();
   </script>
@@ -632,11 +703,11 @@
 
     // Yuki 重點小時刻：替換下方照片檔名、日期與文字即可。
     const yukiMoments = [
-      { photo:"yuki/moments/moment01.jpg", date:"2021.08.29", title:"Yuki 來了", note:"從這一天開始，我們變成三個人的家。" },
-      { photo:"yuki/moments/moment02.jpg", date:"2021.09.05", title:"第一次一起出門", note:"小小的腳步，陪我們走進更多日常。" },
-      { photo:"yuki/moments/moment03.jpg", date:"2022.03.12", title:"第一次一起旅行", note:"有 Yuki 在的地方，旅途也像家。" },
-      { photo:"yuki/moments/moment04.jpg", date:"2024.06.01", title:"陪我們留下重要的照片", note:"每一個重要時刻，都想讓她一起參與。" },
-      { photo:"yuki/moments/moment05.jpg", date:"2027.03.06", title:"一起迎接婚禮這一天", note:"我們最重要的小小家人，當然不能缺席。" }
+      { photo:"moments/moment01.jpg", chapter:"01", date:"2021.08.29", title:"回家第一天", note:"帶妳回家的那一天\n幸福悄悄住進了我們的生活" },
+      { photo:"moments/moment02.jpg", date:"2021.09.05", title:"第一次一起出門", note:"小小的腳步，陪我們走進更多日常。" },
+      { photo:"moments/moment03.jpg", date:"2022.03.12", title:"第一次一起旅行", note:"有 Yuki 在的地方，旅途也像家。" },
+      { photo:"moments/moment04.jpg", date:"2024.06.01", title:"陪我們留下重要的照片", note:"每一個重要時刻，都想讓她一起參與。" },
+      { photo:"moments/moment05.jpg", date:"2027.03.06", title:"一起迎接婚禮這一天", note:"我們最重要的小小家人，當然不能缺席。" }
     ];
 
     const galleryStates = {};
@@ -709,15 +780,16 @@
 
     function renderYukiMoments(){
       yukiMomentsList.replaceChildren();
-      yukiMoments.forEach(moment=>{
+      yukiMoments.forEach((moment,index)=>{
         const item=document.createElement("article");
         item.className="moment-item";
         item.innerHTML=`
+          <p class="moment-number">${moment.chapter || String(index+1).padStart(2,"0")}</p>
+          <p class="moment-date">${moment.date}</p>
           <div class="moment-photo">
             <img src="${moment.photo}" alt="${moment.title}" loading="lazy">
             <div class="moment-placeholder">請放入 ${moment.photo}</div>
           </div>
-          <p class="moment-date">${moment.date}</p>
           <h3 class="moment-title">${moment.title}</h3>
           ${moment.note ? `<p class="moment-note">${moment.note}</p>` : ""}
           <div class="moment-divider" aria-hidden="true"></div>`;
@@ -913,7 +985,7 @@
       if(!allMessages.length){
         const empty = document.createElement("div");
         empty.className = "message-empty";
-        empty.textContent = "🌿 春日寄語 正等待第一份心意";
+        empty.innerHTML = `<span>🌿 春日寄語</span><span class="message-empty-wait">正等待第一份心意</span>`;
         messageList.appendChild(empty);
         updateMessageMore();
         return;
