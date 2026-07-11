@@ -55,7 +55,7 @@
     .date{font-family:"Cormorant Garamond",serif;font-size:clamp(30px,4.2vw,46px);letter-spacing:.10em;color:#6e8ca1;line-height:1.2}
     .hero h1{margin:0;font-size:clamp(30px,4.2vw,46px);font-weight:400;letter-spacing:.10em;line-height:1.2;color:var(--deep)}
     .jp-title{margin:10px 0 0;font-size:clamp(14px,1.7vw,18px);letter-spacing:.17em;color:#7895aa}
-    .hero-venue{margin:18px 0 0;font-size:14px;letter-spacing:.10em;color:#7894a6}
+    .hero-venue{margin:34px 0 0;font-size:14px;letter-spacing:.10em;color:#7894a6}
     .hero-venue::before{content:"";display:block;width:38px;height:1px;margin:0 auto 13px;background:rgba(110,140,161,.28)}
     .scroll-cue{margin-top:28px;text-decoration:none;font-family:"Cormorant Garamond",serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8ba3b5;display:flex;flex-direction:column;align-items:center;gap:8px}
     .scroll-cue::after{content:"";width:1px;height:45px;background:linear-gradient(#91a8b8,transparent);animation:breathe 1.8s ease-in-out infinite}
@@ -143,7 +143,7 @@
       .hero-title-row{gap:11px;margin-top:34px}
       .date,.hero h1{font-size:25px;letter-spacing:.08em}
       .hero-title-row{gap:12px}
-      .hero-venue{margin-top:16px;font-size:12px;letter-spacing:.06em;white-space:nowrap}
+      .hero-venue{margin-top:28px;font-size:12px;letter-spacing:.06em;white-space:nowrap}
       .jp-title{font-size:13px;letter-spacing:.12em}
       .section{width:min(100% - 32px,680px);padding:88px 0}
       .story-intro,.yuki-layout{grid-template-columns:1fr;gap:28px}
@@ -435,7 +435,7 @@
           <span class="chapter-no">01</span>
           <h2>我們</h2>
         </div>
-        <p class="story-copy">從相知　相伴　到與 Yuki 共度朝夕<br>那些平凡的日常　悄悄累積成最珍貴的風景</p>
+        <p class="story-copy">從相知　相伴　到有 Yuki 陪伴的每一天<br>那些平凡的日常　悄悄累積成最珍貴的風景</p>
       </div>
 
       <div class="gallery-shell" data-gallery="wedding">
@@ -486,21 +486,21 @@
       </div>
 
       <div class="guestbook-card">
-        <p class="guestbook-intro">願每一句話<br>都成為我們珍藏的回憶</p>
+        <p class="guestbook-intro">你的祝福<br>將成為春天最溫柔的風景</p>
 
         <form class="guestbook-form" id="guestbookForm">
           <div class="guestbook-field">
-            <label for="guestName">你的名字（可匿名）</label>
-            <input id="guestName" name="name" type="text" autocomplete="name" maxlength="30" placeholder="不填寫將顯示為匿名">
+            <label for="guestName">你的稱呼</label>
+            <input id="guestName" name="name" type="text" autocomplete="name" maxlength="30" placeholder="請留下你的稱呼">
           </div>
 
           <div class="guestbook-field">
             <label for="guestMessage">想說的話</label>
-            <textarea id="guestMessage" name="message" maxlength="300" required></textarea>
+            <textarea id="guestMessage" name="message" maxlength="300"></textarea>
           </div>
 
           <button class="guestbook-submit" id="guestbookSubmit" type="submit">留下祝福</button>
-          <p class="guestbook-note">名字最多 30 字，留言最多 300 字</p>
+          <p class="guestbook-note">請留下你的稱呼與祝福<br>稱呼 30 字內｜寄語 300 字內</p>
           <p class="guestbook-status" id="guestbookStatus" role="status" aria-live="polite"></p>
         </form>
 
@@ -798,6 +798,38 @@
     const defaultVisibleMessageCount = ()=>window.matchMedia("(max-width: 780px)").matches ? 1 : 2;
     let visibleMessageCount = defaultVisibleMessageCount();
     let blessingButtonTimer = null;
+    let sendingPawTimer = null;
+
+    const SENDING_MESSAGES = [
+      {text:"🐾 Yuki 正在收下你的祝福…", yuki:true},
+      {text:"🌿 寄語正飄向春天中…"},
+      {text:"❄️ 雪花正輕輕帶著這份心意…"},
+      {text:"💙 我們正在收下這份祝福…"},
+      {text:"🍃 春風正將你的心意送來…"},
+      {text:"🕊️ 這份祝福 正在悄悄飛向我們…"}
+    ];
+
+    function stopSendingAnimation(){
+      clearInterval(sendingPawTimer);
+      sendingPawTimer = null;
+    }
+
+    function showRandomSendingMessage(){
+      stopSendingAnimation();
+      const selected = SENDING_MESSAGES[Math.floor(Math.random()*SENDING_MESSAGES.length)];
+      if(!selected.yuki){
+        guestbookSubmit.textContent = selected.text;
+        return;
+      }
+
+      let pawCount = 1;
+      const updateYukiText = ()=>{
+        guestbookSubmit.textContent = `${"🐾".repeat(pawCount)} Yuki 正在收下你的祝福…`;
+        pawCount = pawCount >= 3 ? 1 : pawCount + 1;
+      };
+      updateYukiText();
+      sendingPawTimer = setInterval(updateYukiText, 300);
+    }
 
     function openBlessingModal(){
       const response = BLESSING_RESPONSES[Math.floor(Math.random()*BLESSING_RESPONSES.length)];
@@ -881,7 +913,7 @@
       if(!allMessages.length){
         const empty = document.createElement("div");
         empty.className = "message-empty";
-        empty.textContent = "還沒有寄語，成為第一個留下祝福的人吧";
+        empty.textContent = "🌿 春日寄語 正等待第一份心意";
         messageList.appendChild(empty);
         updateMessageMore();
         return;
@@ -960,9 +992,9 @@
     const messagesQuery = query(messagesRef, orderBy("createdAt", "desc"), limit(50));
     onSnapshot(messagesQuery, renderMessages, error=>{
       console.error(error);
-      guestbookCount.textContent = "無法載入";
-      messageList.innerHTML = '<div class="message-empty">目前無法載入寄語，請稍後再試</div>';
-      setGuestbookStatus("無法連接寄語區，請確認 Firestore 規則已發布", true);
+      guestbookCount.textContent = "暫時無法載入";
+      messageList.innerHTML = '<div class="message-empty">❄️ 春天暫時迷路了 請稍後重新整理頁面</div>';
+      setGuestbookStatus("❄️ 春天暫時迷路了 請稍後重新整理頁面", true);
     });
 
     guestbookForm?.addEventListener("submit", async event=>{
@@ -972,23 +1004,37 @@
       const name = String(formData.get("name") || "").trim();
       const message = String(formData.get("message") || "").trim();
 
-      if(!message){
-        setGuestbookStatus("請填寫想對我們說的話", true);
+      if(!name){
+        setGuestbookStatus("🌿 請留下你的稱呼 讓我們知道這份祝福來自誰", true);
+        document.getElementById("guestName")?.focus();
         return;
       }
 
-      if(name.length > 30 || message.length > 300){
-        setGuestbookStatus("輸入內容超過字數限制", true);
+      if(!message){
+        setGuestbookStatus("🌿 請留下想對我們說的話", true);
+        document.getElementById("guestMessage")?.focus();
+        return;
+      }
+
+      if(name.length > 30){
+        setGuestbookStatus("✨ 名字有點長了 再簡短一點點就好", true);
+        document.getElementById("guestName")?.focus();
+        return;
+      }
+
+      if(message.length > 300){
+        setGuestbookStatus("💙 我們會認真閱讀每一句話 請將寄語控制在 300 字以內", true);
+        document.getElementById("guestMessage")?.focus();
         return;
       }
 
       guestbookSubmit.disabled = true;
-      guestbookSubmit.textContent = "送出中";
+      showRandomSendingMessage();
       setGuestbookStatus("");
 
       try{
         await addDoc(messagesRef, {
-          name: name || "匿名",
+          name,
           message,
           createdAt: serverTimestamp(),
           isHidden: false
@@ -998,8 +1044,9 @@
         openBlessingModal();
       }catch(error){
         console.error(error);
-        setGuestbookStatus("送出失敗，請確認 Firestore 規則已發布", true);
+        setGuestbookStatus("🐾 Yuki 還沒收到這份祝福 請稍後再試一次", true);
       }finally{
+        stopSendingAnimation();
         guestbookSubmit.disabled = false;
         guestbookSubmit.textContent = "留下祝福";
       }
