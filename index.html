@@ -346,14 +346,14 @@
       min-height:100svh;padding:28px;background:
       radial-gradient(circle at 50% 35%,rgba(220,236,246,.72),transparent 34%),
       linear-gradient(180deg,#f8fcfe 0%,#fff 70%,#f6fafc 100%);
-      overflow:hidden;transition:opacity .72s ease,visibility .72s ease
+      overflow:hidden;transition:opacity .95s ease,visibility .95s ease
     }
     .opening-cover.is-button-leaving .opening-enter{
       animation:none;opacity:0;transform:translateY(-4px);pointer-events:none
     }
     .opening-cover.is-text-leaving .opening-title,
     .opening-cover.is-text-leaving .opening-subtitle{
-      animation:none;opacity:0;transform:translateY(-8px)
+      animation:none;opacity:0;transform:translateY(-8px);filter:blur(2px)
     }
     .opening-cover.is-snow-leaving .opening-snowflake{opacity:0;transform:translate3d(-50%,14px,0) scale(2.05) rotate(58deg)}
     .opening-cover.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
@@ -382,7 +382,7 @@
       backface-visibility:hidden;-webkit-backface-visibility:hidden;
       animation:openingSnowFall 3.1s linear forwards,
                 openingSnowFloat 5.2s ease-in-out 3.15s infinite;
-      transition:opacity .72s ease,transform .9s cubic-bezier(.22,.61,.36,1)
+      transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.22,.61,.36,1)
     }
     @keyframes openingSnowFall{
       0%{opacity:0;transform:translate3d(calc(-50% - 14px),-48vh,0) scale(.42) rotate(-18deg)}
@@ -394,7 +394,7 @@
       50%{transform:translate3d(calc(-50% + 2px),3px,0) scale(1.18) rotate(37deg)}
     }
     .opening-title,.opening-subtitle,.opening-enter{opacity:0;transform:translateY(10px)}
-    .opening-title,.opening-subtitle{transition:opacity .58s ease,transform .58s ease}
+    .opening-title,.opening-subtitle{transition:opacity 2.5s ease,transform 2.5s ease,filter 2.5s ease}
     .opening-title{
       margin:16px 0 0;font-size:clamp(22px,4.2vw,30px);font-weight:400;letter-spacing:.16em;color:var(--deep);
       animation:openingTextIn .9s ease 3.55s forwards
@@ -408,7 +408,7 @@
       margin-top:38px;padding:12px 10px;border:0;border-top:1px solid rgba(73,101,121,.22);border-bottom:1px solid rgba(73,101,121,.22);
       background:transparent;color:#567287;letter-spacing:.13em;cursor:pointer;
       animation:openingTextIn .85s ease 5.55s forwards;
-      transition:opacity .32s ease,transform .32s ease,letter-spacing .3s ease,color .3s ease,border-color .3s ease
+      transition:opacity 2.5s ease,transform 2.5s ease,letter-spacing .3s ease,color .3s ease,border-color .3s ease
     }
     .opening-enter:hover{letter-spacing:.18em;color:var(--deep);border-color:rgba(73,101,121,.4)}
     .opening-drift{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -629,44 +629,72 @@
       enter?.addEventListener("click",()=>{
         enter.disabled=true;
 
-        // 第一段：按下後文字與按鈕立即、柔和地淡出。
-        cover.classList.add("is-button-leaving","is-text-leaving");
+        const title=cover.querySelector(".opening-title");
+        const subtitle=cover.querySelector(".opening-subtitle");
+        const snow=cover.querySelector(".opening-snowflake");
+        const textPieces=[title,subtitle,enter].filter(Boolean);
 
-        // 第二段：等文字退場後，中央雪花才開始往視線前方飄近。
+        // 直接從元素目前畫面上的狀態開始淡出，避免取消淡入動畫時瞬間跳成透明。
+        textPieces.forEach((piece,index)=>{
+          const current=getComputedStyle(piece);
+          piece.style.animation="none";
+          piece.animate([
+            {
+              opacity:Number.parseFloat(current.opacity) || 1,
+              transform:current.transform === "none" ? "translateY(0)" : current.transform,
+              filter:"blur(0px)"
+            },
+            {
+              opacity:.72,
+              transform:"translateY(-2px)",
+              filter:"blur(.35px)",
+              offset:.42
+            },
+            {
+              opacity:0,
+              transform:"translateY(-8px)",
+              filter:"blur(2px)"
+            }
+          ],{
+            duration:2500,
+            delay:index*70,
+            easing:"cubic-bezier(.22,.61,.36,1)",
+            fill:"forwards"
+          });
+        });
+
+        // 文字還在最後一段淡出時，雪花就自然接著靠近，避免中間出現停頓段差。
         window.setTimeout(()=>{
-          const snow=cover.querySelector(".opening-snowflake");
           if(!snow) return;
-
           const current=getComputedStyle(snow);
           const fromTransform=current.transform;
           const fromOpacity=current.opacity;
           snow.style.animation="none";
           snow.animate([
-            {transform:fromTransform,opacity:fromOpacity},
-            {transform:"translate3d(-50%,14px,0) scale(2.05) rotate(58deg)",opacity:0}
+            {offset:0,transform:fromTransform,opacity:fromOpacity},
+            {offset:.8,transform:"translate3d(-50%,8px,0) scale(1.58) rotate(48deg)",opacity:.82},
+            {offset:1,transform:"translate3d(-50%,18px,0) scale(2.4) rotate(64deg)",opacity:0}
           ],{
-            duration:820,
-            easing:"cubic-bezier(.2,.72,.2,1)",
+            duration:1600,
+            easing:"cubic-bezier(.35,.05,.2,1)",
             fill:"forwards"
           });
-        },650);
+        },1550);
 
-        // 雪花移動一段後，開場背景再接著淡出，避免全部一起動得太急。
+        // 雪花接近尾聲時背景柔和退場，三段動畫彼此重疊，不再一段一段斷開。
         window.setTimeout(()=>{
           cover.classList.add("is-leaving");
-        },1120);
+        },2650);
 
-        // Hero 的速度與分層動畫完全維持原本設定。
         window.setTimeout(()=>{
           document.body.classList.remove("opening-locked");
           document.body.classList.add("hero-entering");
-        },1450);
+        },3200);
 
-        // 等 Hero 完整浮現後再清除開場與動畫狀態。
         window.setTimeout(()=>{
           cover.remove();
           document.body.classList.remove("hero-entering");
-        },5850);
+        },7600);
       });
     })();
   </script>
