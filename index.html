@@ -464,6 +464,20 @@
     .invitation-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:28px}
     .invitation-actions .invitation-link{display:flex;align-items:center;justify-content:center;width:min(100%,290px);min-height:46px;margin:0;text-align:center}
     @media(max-width:780px){.invitation-info{padding:36px 24px}.invitation-date span{display:inline-block}.transport-item p br{display:block}}
+
+    /* 倒數與結尾合併：保留原本字體與淡藍雪景，縮短手機版留白 */
+    .countdown-combined{padding:90px 22px 100px}
+    .countdown-farewell{margin:65px auto 0;text-align:center}
+    .countdown-farewell::before{content:"";display:block;width:42px;height:1px;margin:0 auto 40px;background:rgba(110,140,161,.25)}
+    .countdown-farewell h2{margin:0;font-size:clamp(28px,4vw,48px);font-weight:400;letter-spacing:.12em;color:var(--deep)}
+    .countdown-farewell p{margin:24px 0 0;font-family:"Cormorant Garamond",serif;font-size:21px;letter-spacing:.12em;color:#7894a6}
+    @media(max-width:780px){
+      .countdown-combined{padding:72px 18px 90px}
+      .countdown-farewell{margin-top:56px}
+      .countdown-farewell::before{margin-bottom:36px}
+      .countdown-farewell h2{font-size:clamp(21px,6vw,30px);letter-spacing:.05em;white-space:nowrap}
+      .countdown-farewell p{font-size:20px}
+    }
   </style>
 </head>
 <body class="opening-locked">
@@ -603,15 +617,11 @@
       </div>
     </section>
 
-    <section class="countdown reveal" aria-label="我們正在等待春天">
+    <section class="countdown countdown-combined reveal" aria-label="我們正在等待春天">
       <p class="countdown-label">我們正在等待春天</p>
       <div class="countdown-days" id="countdownDays">—</div>
       <p class="countdown-unit" id="countdownUnit">日</p>
-      
-    </section>
-
-    <section class="closing reveal">
-      <div>
+      <div class="countdown-farewell">
         <h2>春日將至　盼與你相見</h2>
         <p>Wayne　Sophia　Yuki</p>
       </div>
