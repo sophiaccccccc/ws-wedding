@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
   <meta name="description" content="Wayne &amp; Sophia Wedding">
-  <meta property="og:title" content="Wayne &amp; Sophia Wedding">
-  <meta property="og:description" content="春雪如初">
+  <meta property="og:title" content="春雪如初｜庭維與舒婷的婚禮邀請">
+  <meta property="og:description" content="2027.03.06｜孫立人將軍官邸｜誠摯邀請您參與我們的婚禮">
   <meta property="og:type" content="website">
   <title>Wayne &amp; Sophia Wedding</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f7fbfd'/%3E%3Cg stroke='%234d687b' stroke-width='4' stroke-linecap='round'%3E%3Cpath d='M32 8v48M11.2 20l41.6 24M11.2 44l41.6-24'/%3E%3Cpath d='M32 8l-6 7m6-7 6 7M32 56l-6-7m6 7 6-7M11.2 20l9.1.9m-9.1-.9 3.2-8.6M52.8 44l-9.1-.9m9.1.9-3.2 8.6M11.2 44l9.1-.9m-9.1.9 3.2 8.6M52.8 20l-9.1.9m9.1-.9-3.2-8.6'/%3E%3C/g%3E%3C/svg%3E">
@@ -280,6 +280,8 @@
     .moment-item{position:relative;text-align:center}
     .moment-photo{width:min(620px,100%);aspect-ratio:4/3;margin:0 auto;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#edf6fb,#d6e7f1);box-shadow:0 22px 55px rgba(78,108,129,.11)}
     .moment-photo img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
+    /* 第五張照片：提高畫面中的照片位置，其他照片不受影響 */
+    .moment-item:nth-child(5) .moment-photo img{object-position:center 66%}
     .moment-photo img.is-missing{display:none}
     .moment-placeholder{height:100%;display:grid;place-items:center;padding:24px;color:#7e98aa;font-size:14px;letter-spacing:.08em}
     .moment-number{margin:0 0 0;font-family:"Cormorant Garamond",serif;font-size:13px;letter-spacing:.24em;color:#a6b7c2}
@@ -435,6 +437,33 @@
     }
 
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+    .invitation-info{text-align:center;border:1px solid var(--line);border-radius:28px;padding:55px 20px;background:linear-gradient(145deg,#f7fbfd,#fff);box-shadow:0 18px 50px rgba(78,108,129,.05)}
+    .invitation-info p{margin:13px 0;letter-spacing:.09em}
+    .invitation-kicker{font-family:"Cormorant Garamond",serif;color:#8ca3b3;font-size:13px;letter-spacing:.25em!important}
+    .invitation-date{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,5vw,42px);color:var(--deep)}
+    .invitation-date span{font-family:"LXGW WenKai TC",serif;font-size:14px}
+    .invitation-note{color:#8ca3b3;font-size:13px;margin-top:28px!important}
+
+    /* Wedding invitation: structured information and transport */
+    .invitation-welcome{font-size:clamp(16px,2vw,19px);line-height:2.1;color:var(--deep);margin:0 0 36px!important}
+    .invitation-detail{max-width:580px;margin:0 auto;text-align:left}
+    .invitation-field{padding:20px 0;border-top:1px solid var(--line)}
+    .invitation-label{display:block;font-size:14px;letter-spacing:.16em;color:#7c98aa}
+    .invitation-field p{margin:5px 0 0;letter-spacing:.045em}
+    .invitation-date{font-size:clamp(27px,5vw,39px)!important;line-height:1.3}
+    .invitation-date span{font-size:15px;white-space:nowrap}
+    .invitation-value{font-size:clamp(17px,2.4vw,20px);color:var(--deep);line-height:1.85}
+    .invitation-address{font-size:16px;color:var(--ink)}
+    .invitation-transport{max-width:580px;margin:8px auto 0;padding-top:25px;border-top:1px solid var(--line);text-align:left}
+    .invitation-transport h3{font-size:20px;font-weight:400;letter-spacing:.12em;color:var(--deep);margin:0 0 16px}
+    .transport-item{padding:10px 0 14px}
+    .transport-item h4{font-size:16px;font-weight:400;letter-spacing:.08em;color:var(--deep);margin:0}
+    .transport-item p{font-size:15px;line-height:1.95;letter-spacing:.02em;margin:5px 0 0;color:var(--ink)}
+    .invitation-link{display:inline-block;margin:20px 0 6px;padding:10px 22px;border:1px solid rgba(73,101,121,.35);border-radius:999px;text-decoration:none;font-size:15px;letter-spacing:.04em;color:var(--deep);background:#fff;transition:background .2s ease}
+    .invitation-link:hover{background:#edf5fa}
+    .invitation-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:28px}
+    .invitation-actions .invitation-link{display:flex;align-items:center;justify-content:center;width:min(100%,290px);min-height:46px;margin:0;text-align:center}
+    @media(max-width:780px){.invitation-info{padding:36px 24px}.invitation-date span{display:inline-block}.transport-item p br{display:none}}
   </style>
 </head>
 <body class="opening-locked">
@@ -444,7 +473,7 @@
       <div class="opening-snowflake" aria-hidden="true">❄</div>
       <h1 class="opening-title">雪と芽吹く春</h1>
       <p class="opening-subtitle">雪のある日々を　重ねてゆく</p>
-      <button class="opening-enter" id="openingEnter" type="button">走進我們的春天</button>
+      <button class="opening-enter" id="openingEnter" type="button">開啟我們的喜帖</button>
     </div>
   </div>
   <div class="weather-layer" id="weatherLayer" aria-hidden="true"></div>
@@ -458,19 +487,39 @@
         <h1>春雪如初</h1>
       </div>
       <p class="jp-title">雪と芽吹く春</p>
-      <p class="hero-venue">孫立人將軍官邸（陸軍聯誼廳）</p>
       
     </div>
   </header>
 
   <main>
+    <section class="section reveal" id="wedding-info">
+      <div class="chapter"><span class="chapter-no">01</span><h2>春日之約</h2></div>
+      <div class="invitation-info">
+        <p class="invitation-welcome">誠摯邀請您<br>與我們一同見證春日裡的幸福時刻</p>
+        <div class="invitation-detail">
+          <div class="invitation-field"><span class="invitation-label">日期</span><p class="invitation-date">2027.03.06 <span>星期六</span></p></div>
+          <div class="invitation-field"><span class="invitation-label">時間</span><p class="invitation-value">證婚儀式｜11:00<br>入席時間｜12:00</p></div>
+          <div class="invitation-field"><span class="invitation-label">地址</span><p class="invitation-value">孫立人將軍官邸（陸軍聯誼廳）<br><span class="invitation-address">臺北市中正區南昌路一段 136 號</span></p></div>
+        </div>
+        <div class="invitation-transport">
+          <h3>交通方式</h3>
+          <div class="transport-item"><h4>自行開車</h4><p>可使用 Google Maps 導航前往會場。<br>停車空間請以婚宴當日現場安排為準。</p></div>
+          <div class="transport-item"><h4>搭車資訊</h4><p>搭乘捷運至中正紀念堂站 2 號出口，<br>或古亭站 7 號出口，再步行前往。</p></div>
+        </div>
+        <div class="invitation-actions">
+          <a class="invitation-link" href="https://maps.app.goo.gl/YvVxSbvgtFBgM9uS6" target="_blank" rel="noopener noreferrer">開啟 Google Maps 導航 ↗</a>
+          <a class="invitation-link" href="https://lin.ee/XHd7ztz" target="_blank" rel="noopener noreferrer" aria-label="加入婚禮官方 LINE">加入婚禮官方 LINE ↗</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section reveal" id="journey">
       <div class="story-intro">
         <div class="chapter">
-          <span class="chapter-no">01</span>
-          <h2>我們</h2>
+          <span class="chapter-no">02</span>
+          <h2>此刻的我們</h2>
         </div>
-        <p class="story-copy">從相知　相伴　到有 Yuki 陪伴的每一天<br>那些平凡的日常　悄悄累積成最珍貴的風景</p>
+        <p class="story-copy">那些平凡而珍貴的瞬間</p>
       </div>
 
       <div class="gallery-shell" data-gallery="wedding">
@@ -485,7 +534,7 @@
 
     <section class="section reveal" id="yuki">
       <div class="chapter">
-        <span class="chapter-no">02</span>
+        <span class="chapter-no">03</span>
         <h2>Yuki</h2>
       </div>
 
@@ -500,7 +549,7 @@
         </div>
 
         <div class="yuki-copy">
-          <h3>與雪相伴　共度朝夕</h3>
+          <h3>春天如約而至<br>我們也如初相伴</h3>
           <p class="jp-sub">雪のある日々を　重ねてゆく</p>
           <p class="body-copy">Yuki 是我們生活裡最柔軟的陪伴<br>也是這場婚禮不可缺席的小小家人<br>從散步　旅行　到每一個平凡日常<br>她陪著我們慢慢把生活變成家的模樣</p>
           <button class="yuki-moments-card" id="openYukiMoments" type="button">
@@ -516,7 +565,7 @@
 
     <section class="guestbook-section reveal" id="guestbook">
       <div class="chapter">
-        <span class="chapter-no">03</span>
+        <span class="chapter-no">04</span>
         <h2>春日寄語</h2>
       </div>
 
@@ -558,7 +607,7 @@
       <p class="countdown-label">我們正在等待春天</p>
       <div class="countdown-days" id="countdownDays">—</div>
       <p class="countdown-unit" id="countdownUnit">日</p>
-      <p class="countdown-date">2027.03.06</p>
+      
     </section>
 
     <section class="closing reveal">
@@ -732,10 +781,11 @@
     // Yuki 重點小時刻：替換下方照片檔名、日期與文字即可。
     const yukiMoments = [
       { photo:"moments/moment01.jpg", chapter:"01", date:"2021.08.29", title:"回家第一天", note:"帶妳回家的那一天\n幸福悄悄住進了我們的生活" },
-      { photo:"moments/moment02.jpg", date:"2021.09.05", title:"第一次一起出門", note:"小小的腳步，陪我們走進更多日常。" },
-      { photo:"moments/moment03.jpg", date:"2022.03.12", title:"第一次一起旅行", note:"有 Yuki 在的地方，旅途也像家。" },
-      { photo:"moments/moment04.jpg", date:"2024.06.01", title:"陪我們留下重要的照片", note:"每一個重要時刻，都想讓她一起參與。" },
-      { photo:"moments/moment05.jpg", date:"2027.03.06", title:"一起迎接婚禮這一天", note:"我們最重要的小小家人，當然不能缺席。" }
+      { photo:"moments/moment02.JPG", date:"2022.01.16", title:"第一次寵物旅館", note:"第一次短暫分開的日子\n才發現原來早已這麼捨不得妳" },
+      { photo:"moments/moment03.JPG", date:"2023.03.18", title:"全家福拍攝", note:"有些瞬間只有一次\n卻值得用一輩子珍藏" },
+      { photo:"moments/moment04.JPEG", date:"2024.07.07", title:"寵物攝影初體驗", note:"想把妳每一個可愛的模樣\n都好好收藏在我們的回憶裡" },
+      { photo:"moments/moment05.jpeg", date:"2025.07.05", title:"宜蘭慶生", note:"又陪妳走過了一個生日\n願往後的每一年都有妳的笑容" },
+      { photo:"", date:"", title:"待續", note:"" }
     ];
 
     const galleryStates = {};
@@ -815,16 +865,18 @@
           <p class="moment-number">${moment.chapter || String(index+1).padStart(2,"0")}</p>
           <p class="moment-date">${moment.date}</p>
           <div class="moment-photo">
-            <img src="${moment.photo}" alt="${moment.title}" loading="lazy">
-            <div class="moment-placeholder">請放入 ${moment.photo}</div>
+            ${moment.photo ? `<img src="${moment.photo}" alt="${moment.title}" loading="lazy">` : ""}
+            <div class="moment-placeholder">${moment.photo ? `請放入 ${moment.photo}` : "照片待補"}</div>
           </div>
           <h3 class="moment-title">${moment.title}</h3>
           ${moment.note ? `<p class="moment-note">${moment.note}</p>` : ""}
           <div class="moment-divider" aria-hidden="true"></div>`;
         const img=item.querySelector("img");
         const placeholder=item.querySelector(".moment-placeholder");
-        img.addEventListener("load",()=>placeholder.remove());
-        img.addEventListener("error",()=>img.classList.add("is-missing"));
+        if(img){
+          img.addEventListener("load",()=>placeholder.remove());
+          img.addEventListener("error",()=>img.classList.add("is-missing"));
+        }
         yukiMomentsList.appendChild(item);
       });
     }
