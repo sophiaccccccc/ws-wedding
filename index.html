@@ -465,6 +465,9 @@
     .invitation-actions .invitation-link{display:flex;align-items:center;justify-content:center;width:min(100%,290px);min-height:46px;margin:0;text-align:center}
     @media(max-width:780px){.invitation-info{padding:36px 24px}.invitation-date span{display:inline-block}.transport-item p br{display:block}}
 
+    .transport-mobile{display:none}
+    @media(max-width:780px){.transport-desktop{display:none}.transport-item p.transport-mobile{display:block}}
+
     /* 倒數與結尾合併：保留原本字體與淡藍雪景，縮短手機版留白 */
     .countdown-combined{padding:90px 22px 100px}
     .countdown-farewell{margin:65px auto 0;text-align:center}
@@ -518,7 +521,7 @@
         <div class="invitation-transport">
           <h3>交通方式</h3>
           <div class="transport-item"><h4>自行開車</h4><p>可使用 Google Maps 導航前往會場<br>停車空間請以婚宴當日現場安排為準</p></div>
-          <div class="transport-item"><h4>搭車資訊</h4><p>捷運中正紀念堂站 2 號出口 / 古亭站 7 號出口<br>再步行前往</p></div>
+          <div class="transport-item"><h4>搭車資訊</h4><p class="transport-desktop">捷運中正紀念堂站 2 號出口 / 捷運古亭站 7 號出口<br>再步行前往</p><p class="transport-mobile">捷運中正紀念堂站 2 號出口 步行前往<br>捷運古亭站 7 號出口 步行前往</p></div>
         </div>
         <div class="invitation-actions">
           <a class="invitation-link" href="https://maps.app.goo.gl/YvVxSbvgtFBgM9uS6" target="_blank" rel="noopener noreferrer">開啟 Google Maps 導航 ↗</a>
